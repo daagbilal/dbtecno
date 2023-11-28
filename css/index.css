@@ -1,0 +1,684 @@
+@font-face {
+    font-family: 'Nunito';
+    /* Yazı tipinin adını buraya yaz */
+    src: url('../Nunito/static/Nunito-Regular.ttf') format('woff');
+
+}
+
+body {
+    font-family: Nunito, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: white;
+    width: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.logo {
+    margin: 0;
+    width: 200px;
+}
+
+.header .login a {
+    text-decoration: none;
+    transition: 0.3s;
+
+}
+
+.search {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-1 {
+    width: 90%;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 8px 10px;
+    margin: 0;
+}
+
+.search-2 {
+    width: 60px;
+    border: none;
+    border-radius: 15px;
+    background-color: #0558EE;
+    color: white;
+}
+
+.search-1:active {
+    border: 2px solid black;
+}
+
+.categories {
+    background-color: white;
+    padding: 10px;
+    width: auto;
+    position: sticky;
+    top: 85.5px;
+    z-index: 1;
+}
+
+.categories ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.categories ul li {
+    display: inline;
+    list-style: none;
+}
+
+.categories ul li a {
+    text-decoration: none;
+    font-size: large;
+    color: black;
+    transition: 0.3s;
+    padding: 8px;
+    border-bottom: 2px solid white;
+}
+
+.categories ul li a:hover {
+    color: #999;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 400px;
+    background-color: #daddd678;
+}
+
+.product {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 12.5%;
+    min-height: 350px;
+    padding: 20px;
+    margin: 1.66%;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #181D21;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+}
+
+.product h3 {
+    margin: 0;
+    padding: 10px 0;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product h4 {
+    margin: 0;
+    color: #181D21;
+    text-decoration: none;
+}
+
+.product:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
+}
+
+
+footer {
+    background-color: white;
+    color: black;
+    text-align: center;
+    height: 60px;
+    padding: 20px;
+    margin-top: 75px;
+}
+
+.urun {
+    width: 90%;
+    min-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.urun img {
+    height: 400px;
+}
+
+.urun div {
+    width: 40%;
+    height: 500px;
+    background-color: #F3F3F7;
+    border-radius: 15px;
+
+}
+
+.urun div div {
+    margin-top: 125px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 300px;
+    text-align: center;
+}
+
+input[type=number] {
+    width: 30px;
+}
+
+.sepetekle1 {
+    width: 80%;
+    font-size: medium;
+    margin-top: 20px;
+    height: 40px;
+    background-color: #0558EE;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: 0.5s;
+
+}
+
+.sepetekle1:hover {
+    background-color: #0557eebb;
+}
+
+.sepetekle2 {
+    width: 80%;
+    font-size: medium;
+    height: 40px;
+    background-color: #0558EE;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    transition: 0.5s;
+
+}
+
+.sepetekle2:hover {
+    background-color: #0557eebb;
+}
+
+.ozellikler {
+    width: 100%;
+    text-align: center;
+    margin-top: 75px;
+
+}
+
+table {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: large;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+td {
+    width: 50%;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.flex-ozellikler {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    min-height: 175px;
+
+}
+
+.flex-ozellik {
+    width: 20%;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #F3F3F7;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.baslik {
+    margin: 0;
+    padding: 10px;
+    background-color: #DADDD6;
+    text-align: center;
+}
+
+.button {
+    display: block;
+    text-decoration: none;
+    font-size: large;
+    padding: 5px 10px;
+    background-color: #0558EE;
+    color: white;
+    border-radius: 8px;
+    transition: 0.5s;
+}
+
+.button:hover {
+    background-color: #0557eebb;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.navbar ul li {
+    display: inline-block;
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 137.5px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.submenu li {
+    display: block;
+    padding: 10px;
+    width: 90%;
+}
+
+.submenu li a {
+    text-decoration: none;
+    font-size: large;
+    color: #181D21;
+}
+
+.navbar ul li:hover .submenu {
+    display: block;
+
+}
+
+.sepet-content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 200px;
+    margin: 10px auto;
+    padding: 20px 0;
+    background-color: #DADDD6;
+}
+
+.sepet {
+    width: 60%;
+    text-align: center;
+    background-color: #DADDD6;
+    padding: 0 20px;
+}
+
+.sepet-urun {
+    list-style-type: none;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 15px 0;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.sepet-baslik {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sepet-baslik a {
+    text-decoration: none;
+    color: #181D21;
+}
+
+.sepet-baslik img {
+    height: 80%;
+}
+
+.urun_kaldir {
+    padding: 5px 10px;
+    background-color: #0558EE;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+
+}
+
+.sepet-tutar {
+    width: 20%;
+    height: 250px;
+    margin: 15px 0;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.siparis_ver {
+    padding: 10px 20px;
+    background-color: #0558EE;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.profile-content {
+    width: 90%;
+    min-height: 450px;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+}
+
+.user-menu {
+    width: 15%;
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.user-menu ul {
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.user-menu li {
+    list-style: none;
+    margin: 10px 0;
+
+}
+
+.user-menu a {
+    text-decoration: none;
+    color: #181D21;
+}
+
+.user-pr {
+    width: 45%;
+    border: 1px solid gray;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.user-pr form {
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.user-pr input[type=text] {
+    margin: 10px auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border-color: #181D21;
+}
+
+.user-pr input[type=date] {
+    margin: 10px auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border-color: #181D21;
+}
+
+.user-pr input[type=radio] {
+    margin: 10px auto;
+}
+
+.user-pr button {
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    border-radius: 5px;
+    border: none;
+    background-color: #0558EE;
+    color: white;
+}
+
+.pswd {
+    width: 35%;
+    border: 1px solid grey;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.pswd form {
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.pswd input[type=password] {
+    margin: 15px auto;
+    width: 80%;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border-color: #181D21;
+}
+
+.pswd button {
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    border-radius: 5px;
+    border: none;
+    background-color: #0558EE;
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+    .header .login a {
+        font-size: medium;
+    }
+
+    .categories ul li a {
+        font-size: medium;
+    }
+
+    .product h3 {
+        font-size: medium;
+    }
+
+    .product h4 {
+        font-size: small;
+    }
+
+    .logo {
+        width: 125px;
+    }
+
+    .search {
+        width: 40%;
+    }
+
+    .search-1 {
+        padding: 4px 5px;
+    }
+
+    .product {
+        width: 25%;
+    }
+
+    .product h3 {
+        font-size: small;
+    }
+
+    .urun div {
+        width: 90%;
+    }
+
+    table {
+        width: 80%;
+    }
+
+    .flex-ozellik {
+        width: 50%;
+    }
+
+    .button {
+        padding: 3.75px 7.5px;
+        font-size: small;
+    }
+
+    .submenu li {
+        padding: 3.75px 7.5px;
+        display: block;
+    }
+
+    .submenu li a {
+        font-size: small;
+    }
+
+    .submenu {
+        min-width: 130px;
+    }
+
+    .sepet {
+        width: 100%;
+    }
+
+    .sepet-tutar {
+        width: 90%;
+    }
+
+    .sepetim-baslik {
+        font-size: large;
+    }
+
+    .sepet-baslik div a {
+        font-size: small;
+    }
+
+    .categories {
+        top: 65px;
+    }
+}
+
+@media (max-width: 500px) {
+    .category-anasayfa {
+        display: none;
+    }
+
+    .baslik {
+        font-size: medium;
+    }
+
+    .urun img {
+        height: 300px;
+    }
+
+    .search {
+        width: 32.5%;
+    }
+
+    .product {
+        min-height: 230px;
+    }
+
+    .sepetekle1 {
+        font-size: small;
+    }
+}
+
+@media (max-width: 430px) {
+    .product {
+        width: 25%;
+    }
+
+    .logo {
+        width: 50%;
+    }
+
+    .navbar {
+        width: 55%;
+    }
+
+    .header a {
+        text-align: center;
+    }
+
+    .search {
+        width: 45%;
+    }
+
+    .sepet-urun {
+        flex-wrap: wrap;
+        height: 200px;
+    }
+
+    .sepet-baslik {
+        width: 100%;
+        height: 50%;
+    }
+
+    .categories {
+        top: 100px;
+    }
+
+
+}
+
+@media (max-width: 356px) {
+    .search {
+        display: none;
+    }
+
+    .navbar {
+        width: 60%;
+        margin-top: 10px;
+    }
+
+    .categories {
+        display: none;
+    }
+
+    .product {
+        width: 62.5%;
+        min-height: 330px;
+    }
+}

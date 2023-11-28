@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'Nunito'; /* Yazı tipinin adını buraya yaz */
+    src: url('../Nunito/static/Nunito-Regular.ttf') format('woff');
+ 
+}
+body {
+    font-family: Nunito, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.header{
+    padding: 20px;
+    text-align: center;
+}
+
+img {
+    margin: 0;
+    width: 200px;
+}
+.log {
+
+    height: 40%;
+    width: 30%;
+    background-color: 	#f8f9fa;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.login {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+form {
+    width: 80%;
+    margin: 20px auto;
+
+}
+
+input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+button {
+    padding: 10px;
+    font-size: medium;
+    border-radius: 8px;
+    background-color: #0558EE;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+button:hover {
+    background-color: white;
+    color: #0558EE;
+    box-shadow: 0 2px 4px 0 gray;
+}
+
+h3 {
+    margin: 10px 0;
+}
+
+.uyari {
+    font-size: medium;
+}
+
+@media (max-width: 768px) {
+    .log {
+        width: 50%;
+    }
+    .uyari {
+        font-size: small;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .log {
+       width: 70%;
+    }
+}
+@media (max-width: 430px) {
+    .log {
+        width: 90%;
+    }
+}
