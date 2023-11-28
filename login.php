@@ -65,8 +65,6 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                 $loginErr = "Bir hata oluştu.";
             }
         }
-        mysqli_stmt_close($stmt);
-        mysqli_close($baglanti);
     }
 }
 ?>
