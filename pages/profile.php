@@ -32,7 +32,7 @@ if (!isLoggedIn()) {
     }
 
     if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-pswd"])) {
-        $mevcut_sifre = $_POST["password"];
+        $mevcut_sifre = htmlspecialchars($_POST["password"]);;
 
         $sql = "SELECT sifre FROM users WHERE id= ?";
         $stmt = mysqli_prepare($baglanti, $sql);
@@ -45,10 +45,10 @@ if (!isLoggedIn()) {
 
 
         if (password_verify($mevcut_sifre, $user["sifre"])) {
-            $newpswd = $_POST["newpassword"];
-            $renewpswd = $_POST["renewpassword"];
+            $newpswd = htmlspecialchars($_POST["newpassword"]);
+            $renewpswd = htmlspecialchars($_POST["renewpassword"]);
 
-            if ($mevcut_sifre != $newpswd) {
+            if (!password_verify($mevcut_sifre, $newpswd)) {
 
                 if ($newpswd == $renewpswd) {
                     if (strlen($newpswd) < 8) {
@@ -141,13 +141,13 @@ if (!isLoggedIn()) {
             <form action="profile.php" method="post">
                 <h3>Şifre Güncelleme</h3>
                 <label for="Password">Mevcut Şifre:</label><br>
-                <input type="password" name="password"><br>
+                <input type="password" name="password" required><br>
                 <span class="uyari"><?php echo $pswdErr ?></span>
                 <label for="newpassword">Yeni Şifre:</label><br>
-                <input type="password" name="newpassword"><br>
+                <input type="password" name="newpassword" required><br>
                 <span class="uyari"><?php echo $newpswdErr ?></span>
                 <label for="renewpassword">Yeni Şifre(Tekrar):</label><br>
-                <input type="password" name="renewpassword"><br>
+                <input type="password" name="renewpassword" required><br>
                 <span class="uyari"><?php echo $pswdmessage ?></span>
                 <button type="submit" name="update-pswd">Şifreyi Güncelle</button>
             </form>
