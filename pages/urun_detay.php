@@ -31,7 +31,7 @@ if ($id[0] == 1) {
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">

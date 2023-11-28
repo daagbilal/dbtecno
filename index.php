@@ -2,7 +2,7 @@
 <?php require("libs/functions.php") ?>
 <?php session_start(); ?>
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
