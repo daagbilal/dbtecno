@@ -11,7 +11,7 @@ if (!isLoggedIn()) {
     $result = mysqli_query($baglanti, $sql);
     $bilgi = mysqli_fetch_assoc($result);
 
-    $pswdErr = $newpswdErr = "";
+    $pswdErr = $newpswdErr = $pswdmessage = "";
 
     if (isset($_POST["update-user"])) {
 
@@ -26,7 +26,6 @@ if (!isLoggedIn()) {
         $cinsiyet = $_POST["cinsiyet"];
 
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
 
         $_SESSION["ad"] = $ad;
     }
@@ -62,6 +61,7 @@ if (!isLoggedIn()) {
                         $stmt = mysqli_prepare($baglanti, $sql);
                         mysqli_stmt_bind_param($stmt, "si", $newpswd, $musteri_id);
                         mysqli_stmt_execute($stmt);
+                        $pswdmessage = "Şifreniz değiştirildi.";
                         mysqli_stmt_close($stmt);
                     }
                 } else {
@@ -136,6 +136,7 @@ if (!isLoggedIn()) {
                 <span class="uyari"><?php echo $newpswdErr ?></span>
                 <label for="renewpassword">Yeni Şifre(Tekrar):</label><br>
                 <input type="password" name="renewpassword"><br>
+                <span class="uyari"><?php echo $pswdmessage ?></span>
                 <button type="submit" name="update-pswd">Şifreyi Güncelle</button>
             </form>
         </div>

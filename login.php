@@ -51,8 +51,7 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                             $id = $_SESSION["musteri_id"];
 
                             mysqli_stmt_execute($stmt);
-                            mysqli_stmt_close($stmt);
-                            mysqli_close($baglanti);
+
                             header("Location: index.php");
                         } else {
                             $loginErr = "Parola yanlış girildi.";
@@ -65,6 +64,8 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                 $loginErr = "Bir hata oluştu.";
             }
         }
+        mysqli_stmt_close($stmt);
+        mysqli_close($baglanti);
     }
 }
 ?>
