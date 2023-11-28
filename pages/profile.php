@@ -13,7 +13,7 @@ if (!isLoggedIn()) {
 
     $pswdErr = $newpswdErr = $pswdmessage = "";
 
-    if (isset($_POST["update-user"])) {
+    if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-user"])) {
 
         $sql = "UPDATE users SET ad = ?, soyad = ?, dogum_tarih = ?, cinsiyet = ? WHERE id = ?";
 
@@ -31,7 +31,7 @@ if (!isLoggedIn()) {
         $_SESSION["ad"] = $ad;
     }
 
-    if (isset($_POST["update-pswd"])) {
+    if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-pswd"])) {
         $mevcut_sifre = $_POST["password"];
 
         $sql = "SELECT sifre FROM users WHERE id= ?";
