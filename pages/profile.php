@@ -26,6 +26,7 @@ if (!isLoggedIn()) {
         $cinsiyet = $_POST["cinsiyet"];
 
         mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
 
         $_SESSION["ad"] = $ad;
     }
@@ -61,8 +62,8 @@ if (!isLoggedIn()) {
                         $stmt = mysqli_prepare($baglanti, $sql);
                         mysqli_stmt_bind_param($stmt, "si", $newpswd, $musteri_id);
                         mysqli_stmt_execute($stmt);
-                        $pswdmessage = "Şifreniz değiştirildi.";
                         mysqli_stmt_close($stmt);
+                        $pswdmessage = "Şifreniz değiştirildi.";
                     }
                 } else {
                     $newpswdErr = "Lütfen yeni şifrenizi aynı giriniz.<br>";
