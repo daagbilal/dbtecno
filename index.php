@@ -30,7 +30,17 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body>
+<body style="background-color: #daddd678;">
+    <div id="loading">
+        <img src="icons/Double Ring-1s-200px.gif" alt="Yükleniyor..." />
+    </div>
+    <script>
+        window.addEventListener('load', fg_load)
+
+        function fg_load() {
+            document.getElementById('loading').style.display = 'none'
+        }
+    </script>
     <?php include("parts/index_header.php"); ?>
     <?php include("parts/categories.php"); ?>
     <?php
@@ -58,7 +68,7 @@
             $baslik = "Akıllı Saatler";
         }
         if ($product_category) :
-            echo "<h2 class='baslik' style='padding-top: 30px; background-color: #daddd678;'>$baslik</h2>";
+            echo "<h2 class='baslik' style='padding-top: 30px;'>$baslik</h2>";
             echo "<div class='content'>";
             foreach ($product_category as $urun) :
                 echo "<a href='pages/urun_detay.php?kod=$urun[urun_kodu]' class='product' title = '$urun[marka] $urun[model] $urun[seri]'>";
@@ -99,7 +109,7 @@
             }
 
             if ($product) :
-                echo "<h2 class='baslik' style='padding-top: 30px; background-color: #daddd678;'>$baslik</h2>";
+                echo "<h2 class='baslik' style='padding-top: 30px;'>$baslik</h2>";
                 echo "<div class='content'>";
                 foreach ($product as $urun) :
                     echo "<a href='pages/urun_detay.php?kod=$urun[urun_kodu]' class='product' title = '$urun[marka] $urun[model] $urun[seri]'>";

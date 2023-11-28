@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/index.css">
 </head>
 
-<body>
+<body style="background-color: #daddd678;">
     <?php include("../parts/index_header.php"); ?>
     <?php
     if (isLoggedIn()) {
@@ -26,6 +26,7 @@
     ?>
     <h1 class="sepetim-baslik" style="text-align: center; margin:0; padding:0;">Sepetim</h1>
     <div class="sepet-content">
+        <?php include("../parts/user_menu.php") ?>
         <div class="sepet">
             <ul style="padding: 0; margin:0;">
                 <?php

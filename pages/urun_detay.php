@@ -48,7 +48,7 @@ if ($id[0] == 1) {
     <?php
     echo "<div class='urun'>
             <img src='../image/$urun[resim_adi]' alt='$urun[marka] $urun[model] $urun[seri]'>
-            <div>
+            <div style= 'border: 1px solid grey;'>
                 <div>
                     <form action = '../libs/sepete_ekle.php' method = 'post'>
                         <h2>$urun[marka] $urun[model] $urun[seri]</h2>

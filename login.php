@@ -44,8 +44,14 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                             $_SESSION["musteri_id"] = $id;
                             $_SESSION["ad"] = $ad;
                             $_SESSION["login_time"] = date('Y-m-d H:i:s');
+                            $stmt = mysqli_prepare($baglanti, "UPDATE users SET login_time=? WHERE id=?");
+                            mysqli_stmt_bind_param($stmt, "si", $login_time, $id);
+
                             $login_time = $_SESSION["login_time"];
-                            mysqli_query($baglanti, "UPDATE users SET login_time='$login_time' WHERE id=$id");
+                            $id = $_SESSION["musteri_id"];
+
+                            mysqli_stmt_execute($stmt);
+                            mysqli_stmt_close($stmt);
                             mysqli_close($baglanti);
                             header("Location: index.php");
                         } else {
