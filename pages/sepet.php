@@ -12,6 +12,7 @@
 </head>
 
 <body style="background-color: #daddd678;">
+    <script src="../js/loading.js"></script>
     <?php include("../parts/index_header.php"); ?>
     <?php
     if (isLoggedIn()) {

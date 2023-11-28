@@ -43,6 +43,7 @@ if ($id[0] == 1) {
 </head>
 
 <body>
+    <script src="../js/loading.js"></script>
     <?php include("../parts/index_header.php"); ?>
     <?php include("../parts/categories.php"); ?>
     <?php

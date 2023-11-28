@@ -88,6 +88,7 @@ if (!isLoggedIn()) {
 </head>
 
 <body style="background-color: #daddd678;">
+    <script src="../js/loading.js"></script>
     <?php include("../parts/index_header.php"); ?>
     <div class="profile-content">
         <?php include("../parts/user_menu.php"); ?>

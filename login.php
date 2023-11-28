@@ -81,6 +81,7 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
 </head>
 
 <body>
+    <script src="js/loading.js"></script>
     <div class="login">
         <div class="log">
             <div class="header">
