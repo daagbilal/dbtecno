@@ -4,8 +4,8 @@
 // dbtecnoc_db
 
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "dbtecnoc_user";
+$password = "Nr&jm^aaOFX~";
 $dbname = "dbtecnoc_db";
 
 $baglanti = new mysqli($servername, $username, $password, $dbname);
