@@ -88,17 +88,7 @@ if (!isLoggedIn()) {
 </head>
 
 <body style="background-color: #daddd678;">
-    <div id="loading">
-        <img src="../icons/Double Ring-1s-200px.svg" alt="Yükleniyor..." />
-    </div>
 
-    <script>
-        window.addEventListener('load', fg_load)
-
-        function fg_load() {
-            document.getElementById('loading').style.display = 'none'
-        }
-    </script>
     <?php include("../parts/index_header.php"); ?>
     <div class="profile-content">
         <?php include("../parts/user_menu.php"); ?>
