@@ -20,10 +20,10 @@ if (!isLoggedIn()) {
         $stmt = mysqli_prepare($baglanti, "UPDATE users SET ad = ?, soyad = ?, dogum_tarih = ?, cinsiyet = ? WHERE id = ?");
         mysqli_stmt_bind_param($stmt, "ssssi", $ad, $soyad, $dogum_tarih, $cinsiyet, $musteri_id);
 
-        $ad = $_POST["ad"];
-        $soyad = $_POST["soyad"];
-        $dogum_tarih = $_POST["tarih"];
-        $cinsiyet = $_POST["cinsiyet"];
+        $ad = safe_html($_POST["ad"]);
+        $soyad = safe_html($_POST["soyad"]);
+        $dogum_tarih = safe_html($_POST["tarih"]);
+        $cinsiyet = safe_html($_POST["cinsiyet"]);
 
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
@@ -32,7 +32,7 @@ if (!isLoggedIn()) {
     }
 
     if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-pswd"])) {
-        $mevcut_sifre = htmlspecialchars($_POST["password"]);;
+        $mevcut_sifre = safe_html($_POST["password"]);
 
         $sql = "SELECT sifre FROM users WHERE id= ?";
         $stmt = mysqli_prepare($baglanti, $sql);
@@ -45,8 +45,8 @@ if (!isLoggedIn()) {
 
 
         if (password_verify($mevcut_sifre, $user["sifre"])) {
-            $newpswd = htmlspecialchars($_POST["newpassword"]);
-            $renewpswd = htmlspecialchars($_POST["renewpassword"]);
+            $newpswd = safe_html($_POST["newpassword"]);
+            $renewpswd = safe_html($_POST["renewpassword"]);
 
             if (!password_verify($mevcut_sifre, $newpswd)) {
 
@@ -90,6 +90,7 @@ if (!isLoggedIn()) {
 <body style="background-color: #daddd678;">
 
     <?php include("../parts/index_header.php"); ?>
+    <h2 style="text-align: center;">Kullanıcı Bilgilerim</h2>
     <div class="profile-content">
         <?php include("../parts/user_menu.php"); ?>
         <div class="user-pr">

@@ -354,7 +354,6 @@ tr:nth-child(even) {
 .sepet {
     width: 55%;
     text-align: center;
-    padding: 0 20px;
 }
 
 .sepet-urun {
@@ -400,7 +399,6 @@ tr:nth-child(even) {
 .sepet-tutar {
     width: 20%;
     height: 250px;
-    margin: 15px 0;
     background-color: white;
     border: 1px solid grey;
     border-radius: 8px;
@@ -640,6 +638,10 @@ tr:nth-child(even) {
     .user-pr input[type=date] {
         width: 80%;
     }
+
+    .sepet-content {
+        width: 90%;
+    }
 }
 
 @media (max-width: 500px) {
@@ -667,6 +669,10 @@ tr:nth-child(even) {
         font-size: small;
     }
 
+    .profile-content {
+        width: 90%;
+    }
+
     .user-pr {
         width: 100%;
     }
@@ -675,6 +681,7 @@ tr:nth-child(even) {
         width: 100%;
         margin-top: 10px;
     }
+
 }
 
 @media (max-width: 430px) {
@@ -711,6 +718,8 @@ tr:nth-child(even) {
     .categories {
         top: 100px;
     }
+
+
 
 
 }

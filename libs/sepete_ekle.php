@@ -10,7 +10,7 @@ if (isLoggedIn()) {
 
     // Değişkenlere değer atama
     $musteri_id = $_SESSION["musteri_id"];
-    $urun_id = $_POST['product_id'];
+    $urun_id = safe_html($_POST['product_id']);
     $miktar = 1;
     $add_time = date('Y-m-d H:i:s');
 

@@ -8,25 +8,15 @@ if (!isset($_GET["kod"])) {
 $id = $_GET["kod"];
 
 if ($id[0] == 1) {
-    $result_urun = mysqli_query($baglanti, "SELECT * FROM computers WHERE urun_kodu=" . $id);
-
-    $urun = mysqli_fetch_assoc($result_urun);
+    $urun = db_product($baglanti, "computers", $id);
 } elseif ($id[0] == 2) {
-    $result_urun = mysqli_query($baglanti, "SELECT * FROM phones WHERE urun_kodu=" . $id);
-
-    $urun = mysqli_fetch_assoc($result_urun);
+    $urun = db_product($baglanti, "phones", $id);
 } elseif ($id[0] == 3) {
-    $result_urun = mysqli_query($baglanti, "SELECT * FROM televisions WHERE urun_kodu=" . $id);
-
-    $urun = mysqli_fetch_assoc($result_urun);
+    $urun = db_product($baglanti, "televisions", $id);
 } elseif ($id[0] == 4) {
-    $result_urun = mysqli_query($baglanti, "SELECT * FROM tablets WHERE urun_kodu=" . $id);
-
-    $urun = mysqli_fetch_assoc($result_urun);
+    $urun = db_product($baglanti, "tablets", $id);
 } elseif ($id[0] == 5) {
-    $result_urun = mysqli_query($baglanti, "SELECT * FROM smart_watchs WHERE urun_kodu=" . $id);
-
-    $urun = mysqli_fetch_assoc($result_urun);
+    $urun = db_product($baglanti, "smart_watchs", $id);
 }
 
 ?>

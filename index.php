@@ -48,24 +48,19 @@
     if (isset($_GET["id"])) {
         $id = $_GET["id"];
         if ($id == 1) {
-            $products_category = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat FROM computers");
-            $product_category = mysqli_fetch_all($products_category, MYSQLI_ASSOC);
+            $product_category = db_products($baglanti, "computers");
             $baslik = "Bilgisayarlar";
         } elseif ($id == 2) {
-            $products_category = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat FROM phones");
-            $product_category = mysqli_fetch_all($products_category, MYSQLI_ASSOC);
+            $product_category = db_products($baglanti, "phones");
             $baslik = "Telefonlar";
         } elseif ($id == 3) {
-            $products_category = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat FROM televisions");
-            $product_category = mysqli_fetch_all($products_category, MYSQLI_ASSOC);
+            $product_category = db_products($baglanti, "televisions");
             $baslik = "Televizyonlar";
         } elseif ($id == 4) {
-            $products_category = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat FROM tablets");
-            $product_category = mysqli_fetch_all($products_category, MYSQLI_ASSOC);
+            $product_category = db_products($baglanti, "tablets");
             $baslik = "Tabletler";
         } elseif ($id == 5) {
-            $products_category = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat FROM smart_watchs");
-            $product_category = mysqli_fetch_all($products_category, MYSQLI_ASSOC);
+            $product_category = db_products($baglanti, "smart_watchs");
             $baslik = "Akıllı Saatler";
         }
         if ($product_category) :
@@ -88,24 +83,19 @@
     } else {
         for ($x = 1; $x <= 5; $x++) {
             if ($x == 1) {
-                $products = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat,degerlendirme FROM computers ORDER BY degerlendirme DESC, marka ASC LIMIT 5");
-                $product = mysqli_fetch_all($products, MYSQLI_ASSOC);
+                $product = db_products_ctg($baglanti, "computers");
                 $baslik = "Popüler Bilgisayarlar";
             } elseif ($x == 2) {
-                $products = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat,degerlendirme FROM phones ORDER BY degerlendirme DESC, marka ASC LIMIT 5");
-                $product = mysqli_fetch_all($products, MYSQLI_ASSOC);
+                $product = db_products_ctg($baglanti, "phones");
                 $baslik = "Popüler Telefonlar";
             } elseif ($x == 3) {
-                $products = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat,degerlendirme FROM televisions ORDER BY degerlendirme DESC, marka ASC LIMIT 5");
-                $product = mysqli_fetch_all($products, MYSQLI_ASSOC);
+                $product = db_products_ctg($baglanti, "televisions");
                 $baslik = "Popüler Televizyonlar";
             } elseif ($x == 4) {
-                $products = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat,degerlendirme FROM tablets ORDER BY degerlendirme DESC, marka ASC LIMIT 5");
-                $product = mysqli_fetch_all($products, MYSQLI_ASSOC);
+                $product = db_products_ctg($baglanti, "tablets");
                 $baslik = "Popüler Tabletler";
             } elseif ($x == 5) {
-                $products = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat,degerlendirme FROM smart_watchs ORDER BY degerlendirme DESC, marka ASC LIMIT 5");
-                $product = mysqli_fetch_all($products, MYSQLI_ASSOC);
+                $product = db_products_ctg($baglanti, "smart_watchs");
                 $baslik = "Popüler Saatler";
             }
 
