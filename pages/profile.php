@@ -4,16 +4,13 @@ require("../libs/functions.php");
 session_start();
 if (isLoggedIn()) {
     $musteri_id = $_SESSION["musteri_id"];
-    $sql = "SELECT id,ad,soyad,dogum_tarih,cinsiyet FROM users WHERE id = '$musteri_id'";
 
-    $result = mysqli_query($baglanti, $sql);
+    $result = mysqli_query($baglanti, "SELECT id,ad,soyad,dogum_tarih,cinsiyet FROM users WHERE id = '$musteri_id'");
     $bilgi = mysqli_fetch_assoc($result);
 
     $pswdErr = $newpswdErr = $pswdmessage = "";
 
     if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-user"])) {
-
-        $sql = "UPDATE users SET ad = ?, soyad = ?, dogum_tarih = ?, cinsiyet = ? WHERE id = ?";
 
         $stmt = mysqli_prepare($baglanti, "UPDATE users SET ad = ?, soyad = ?, dogum_tarih = ?, cinsiyet = ? WHERE id = ?");
         mysqli_stmt_bind_param($stmt, "ssssi", $ad, $soyad, $dogum_tarih, $cinsiyet, $musteri_id);
@@ -27,28 +24,25 @@ if (isLoggedIn()) {
         mysqli_stmt_close($stmt);
 
         $_SESSION["ad"] = $ad;
+        $_POST = array();
     }
 
     if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-pswd"])) {
         $mevcut_sifre = safe_html($_POST["password"]);
 
-        $sql = "SELECT sifre FROM users WHERE id= ?";
-        $stmt = mysqli_prepare($baglanti, $sql);
+        $stmt = mysqli_prepare($baglanti, "SELECT sifre FROM users WHERE id= ?");
         mysqli_stmt_bind_param($stmt, "i", $musteri_id);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $user = mysqli_fetch_assoc($result);
 
-
-
-
         if (password_verify($mevcut_sifre, $user["sifre"])) {
             $newpswd = safe_html($_POST["newpassword"]);
             $renewpswd = safe_html($_POST["renewpassword"]);
 
-            if (!password_verify($mevcut_sifre, $newpswd)) {
+            if ($mevcut_sifre != $newpswd) {
 
-                if ($newpswd == $renewpswd) {
+                if (($newpswd == $renewpswd)) {
                     if (strlen($newpswd) < 8) {
                         $newpswdErr = "Lütfen en az 8 haneli şifre oluşturunuz.<br>";
                     } elseif (strlen($newpswd) > 15) {
@@ -56,9 +50,8 @@ if (isLoggedIn()) {
                     } else {
                         $hash_pswd = password_hash($newpswd, PASSWORD_DEFAULT);
 
-                        $sql = "UPDATE users SET sifre= ? WHERE id = ?";
-                        $stmt = mysqli_prepare($baglanti, $sql);
-                        mysqli_stmt_bind_param($stmt, "si", $newpswd, $musteri_id);
+                        $stmt = mysqli_prepare($baglanti, "UPDATE users SET sifre= ? WHERE id = ?");
+                        mysqli_stmt_bind_param($stmt, "si", $hash_pswd, $musteri_id);
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
                         $pswdmessage = "Şifreniz değiştirildi.";
