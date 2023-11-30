@@ -10,35 +10,19 @@ if (isLoggedIn()) {
 
     $pswdErr = $newpswdErr = $pswdmessage = "";
 
-    if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-user"])) {
-
-        $stmt = mysqli_prepare($baglanti, "UPDATE users SET ad = ?, soyad = ?, dogum_tarih = ?, cinsiyet = ? WHERE id = ?");
-        mysqli_stmt_bind_param($stmt, "ssssi", $ad, $soyad, $dogum_tarih, $cinsiyet, $musteri_id);
-
-        $ad = safe_html($_POST["ad"]);
-        $soyad = safe_html($_POST["soyad"]);
-        $dogum_tarih = safe_html($_POST["tarih"]);
-        $cinsiyet = safe_html($_POST["cinsiyet"]);
-
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-
-        $_SESSION["ad"] = $ad;
-        $_POST = array();
-    }
-
     if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-pswd"])) {
-        $mevcut_sifre = safe_html($_POST["password"]);
+        $mevcut_sifre = $_POST["password"];
 
         $stmt = mysqli_prepare($baglanti, "SELECT sifre FROM users WHERE id= ?");
         mysqli_stmt_bind_param($stmt, "i", $musteri_id);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $user = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
 
         if (password_verify($mevcut_sifre, $user["sifre"])) {
-            $newpswd = safe_html($_POST["newpassword"]);
-            $renewpswd = safe_html($_POST["renewpassword"]);
+            $newpswd = $_POST["newpassword"];
+            $renewpswd = $_POST["renewpassword"];
 
             if ($mevcut_sifre != $newpswd) {
 
@@ -65,6 +49,23 @@ if (isLoggedIn()) {
         } else {
             $pswdErr = "Hatalı şifre girildi.<br>";
         }
+    }
+
+
+    if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-user"])) {
+
+        $stmt = mysqli_prepare($baglanti, "UPDATE users SET ad = ?, soyad = ?, dogum_tarih = ?, cinsiyet = ? WHERE id = ?");
+        mysqli_stmt_bind_param($stmt, "ssssi", $ad, $soyad, $dogum_tarih, $cinsiyet, $musteri_id);
+
+        $ad = safe_html($_POST["ad"]);
+        $soyad = safe_html($_POST["soyad"]);
+        $dogum_tarih = safe_html($_POST["tarih"]);
+        $cinsiyet = safe_html($_POST["cinsiyet"]);
+
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        $_SESSION["ad"] = $ad;
     }
 } else {
     header("Location: ../index.php");
@@ -111,6 +112,8 @@ if (isLoggedIn()) {
                 <input type="radio" name="cinsiyet" id="erkek" value="Erkek" <?php if (isset($_POST["update-user"]) && $cinsiyet == "Erkek") {
                                                                                     echo 'checked';
                                                                                 } elseif ($bilgi["cinsiyet"] == "Erkek") {
+                                                                                    echo 'checked';
+                                                                                } else {
                                                                                     echo 'checked';
                                                                                 } ?>><label for="erkek">Erkek</label>
                 <input type="radio" name="cinsiyet" id="kadın" value="Kadın" <?php if (isset($_POST["update-user"]) && $cinsiyet == "Kadın") {
