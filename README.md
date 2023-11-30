@@ -1,3 +1,1 @@
-İnternet Programcılığı dersi için geliştirilen bir PHP E-Ticaret projesidir.
-
-http://dbtecno.com.tr
+It is a PHP E-Commerce project developed for an Internet Programming course.
