@@ -11,43 +11,41 @@ if (isLoggedIn()) {
     $pswdErr = $newpswdErr = $pswdmessage = "";
 
     if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-pswd"])) {
-        $mevcut_sifre = $_POST["password"];
+        $mevcut_sifre = safe_html($_POST["password"]);
 
         $stmt = mysqli_prepare($baglanti, "SELECT sifre FROM users WHERE id= ?");
         mysqli_stmt_bind_param($stmt, "i", $musteri_id);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $user = mysqli_fetch_assoc($result);
-        mysqli_stmt_close($stmt);
+
+        $newpswd = safe_html($_POST["newpassword"]);
+        $renewpswd = safe_html($_POST["renewpassword"]);
 
         if (password_verify($mevcut_sifre, $user["sifre"])) {
-            $newpswd = $_POST["newpassword"];
-            $renewpswd = $_POST["renewpassword"];
-
             if ($mevcut_sifre != $newpswd) {
-
-                if (($newpswd == $renewpswd)) {
+                if ($newpswd == $renewpswd) {
                     if (strlen($newpswd) < 8) {
-                        $newpswdErr = "Lütfen en az 8 haneli şifre oluşturunuz.<br>";
+                        $pswdErr = "Şifreniz en az 8 haneli olmalı.<br>";
                     } elseif (strlen($newpswd) > 15) {
-                        $newpswdErr = "En fazla 15 haneli şifre oluşturabilirsiniz.<br>";
+                        $pswdErr = "Şifreniz en fazla 15 haneli olmalı.<br>";
                     } else {
                         $hash_pswd = password_hash($newpswd, PASSWORD_DEFAULT);
-
-                        $stmt = mysqli_prepare($baglanti, "UPDATE users SET sifre= ? WHERE id = ?");
+                        $stmt = mysqli_prepare($baglanti, "UPDATE users SET sifre= ? WHERE id= ?");
                         mysqli_stmt_bind_param($stmt, "si", $hash_pswd, $musteri_id);
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_close($stmt);
-                        $pswdmessage = "Şifreniz değiştirildi.";
+                        mysqli_close($baglanti);
+                        $pswdmessage = "Şifreniz değiştirildi.<br>";
                     }
                 } else {
-                    $newpswdErr = "Lütfen yeni şifrenizi aynı giriniz.<br>";
+                    $pswdErr = "Yeni şifreniz eşleşmiyor.<br>";
                 }
             } else {
-                $newpswdErr = "Yeni şifreniz mevcut şifre ile aynı olamaz.<br>";
+                $newpswdErr = "Lütfen farklı bir şifre oluşturun.<br>";
             }
         } else {
-            $pswdErr = "Hatalı şifre girildi.<br>";
+            $pswdErr = "Yanlış şifre girdiniz.<br>";
         }
     }
 
@@ -64,6 +62,7 @@ if (isLoggedIn()) {
 
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
+        mysqli_close($baglanti);
 
         $_SESSION["ad"] = $ad;
     }
@@ -140,8 +139,6 @@ if (isLoggedIn()) {
             </form>
         </div>
     </div>
-
-    <?php mysqli_close($baglanti) ?>
     <?php include("../parts/footer.php") ?>
 
 </body>
