@@ -1,10 +1,8 @@
 <?php
-require_once("../parts/config.php");
+require("../parts/config.php");
 require("../libs/functions.php");
 session_start();
-if (!isLoggedIn()) {
-    header("Location: ../index.php");
-} else {
+if (isLoggedIn()) {
     $musteri_id = $_SESSION["musteri_id"];
     $sql = "SELECT id,ad,soyad,dogum_tarih,cinsiyet FROM users WHERE id = '$musteri_id'";
 
@@ -75,9 +73,11 @@ if (!isLoggedIn()) {
             $pswdErr = "Hatalı şifre girildi.<br>";
         }
     }
+} else {
+    header("Location: ../index.php");
 }
 ?>
-
+<!DOCTYPE html>
 <html lang="tr">
 
 <head>
@@ -97,48 +97,48 @@ if (!isLoggedIn()) {
             <form action="profile.php" method="post">
                 <h3>Üyelik Bilgilerim</h3>
                 <label for="name">Ad:</label><br>
-                <input type="text" name="ad" value="<?php if (isset($_POST["update-user"])) {
-                                                        echo $ad;
-                                                    } else {
-                                                        echo $bilgi["ad"];
-                                                    } ?>"><br>
+                <input type="text" name="ad" id="name" value="<?php if (isset($_POST["update-user"])) {
+                                                                    echo $ad;
+                                                                } else {
+                                                                    echo $bilgi["ad"];
+                                                                } ?>"><br>
                 <label for="surname">Soyad:</label><br>
-                <input type="text" name="soyad" value="<?php if (isset($_POST["update-user"])) {
-                                                            echo $soyad;
-                                                        } else {
-                                                            echo $bilgi["soyad"];
-                                                        } ?>"><br>
+                <input type="text" name="soyad" id="surname" value="<?php if (isset($_POST["update-user"])) {
+                                                                        echo $soyad;
+                                                                    } else {
+                                                                        echo $bilgi["soyad"];
+                                                                    } ?>"><br>
                 <label for="date">Doğum Tarihi:</label><br>
-                <input type="date" name="tarih" value="<?php if (isset($_POST["update-user"])) {
-                                                            echo $dogum_tarih;
-                                                        } else {
-                                                            echo $bilgi["dogum_tarih"];
-                                                        } ?>"><br>
-                <label for="">Cinsiyet:</label><br>
-                <input type="radio" name="cinsiyet" value="Erkek" <?php if (isset($_POST["update-user"]) && $cinsiyet == "Erkek") {
-                                                                        echo 'checked';
-                                                                    } elseif ($bilgi["cinsiyet"] == "Erkek") {
-                                                                        echo 'checked';
-                                                                    } ?>><label for="">Erkek</label>
-                <input type="radio" name="cinsiyet" value="Kadın" <?php if (isset($_POST["update-user"]) && $cinsiyet == "Kadın") {
-                                                                        echo 'checked';
-                                                                    } elseif ($bilgi["cinsiyet"] == "Kadın") {
-                                                                        echo 'checked';
-                                                                    } ?>><label for="">Kadın</label><br>
+                <input type="date" name="tarih" id="date" value="<?php if (isset($_POST["update-user"])) {
+                                                                        echo $dogum_tarih;
+                                                                    } else {
+                                                                        echo $bilgi["dogum_tarih"];
+                                                                    } ?>"><br>
+                <span>Cinsiyet:</span><br>
+                <input type="radio" name="cinsiyet" id="erkek" value="Erkek" <?php if (isset($_POST["update-user"]) && $cinsiyet == "Erkek") {
+                                                                                    echo 'checked';
+                                                                                } elseif ($bilgi["cinsiyet"] == "Erkek") {
+                                                                                    echo 'checked';
+                                                                                } ?>><label for="erkek">Erkek</label>
+                <input type="radio" name="cinsiyet" id="kadın" value="Kadın" <?php if (isset($_POST["update-user"]) && $cinsiyet == "Kadın") {
+                                                                                    echo 'checked';
+                                                                                } elseif ($bilgi["cinsiyet"] == "Kadın") {
+                                                                                    echo 'checked';
+                                                                                } ?>><label for="kadın">Kadın</label><br>
                 <button type="submit" name="update-user">Güncelle</button>
             </form>
         </div>
         <div class="pswd">
             <form action="profile.php" method="post">
                 <h3>Şifre Güncelleme</h3>
-                <label for="Password">Mevcut Şifre:</label><br>
-                <input type="password" name="password" required><br>
+                <label for="password">Mevcut Şifre:</label><br>
+                <input type="password" name="password" id="password" required><br>
                 <span class="uyari"><?php echo $pswdErr ?></span>
                 <label for="newpassword">Yeni Şifre:</label><br>
-                <input type="password" name="newpassword" required><br>
+                <input type="password" name="newpassword" id="newpassword" required><br>
                 <span class="uyari"><?php echo $newpswdErr ?></span>
                 <label for="renewpassword">Yeni Şifre(Tekrar):</label><br>
-                <input type="password" name="renewpassword" required><br>
+                <input type="password" name="renewpassword" id="renewpassword" required><br>
                 <span class="uyari"><?php echo $pswdmessage ?></span>
                 <button type="submit" name="update-pswd">Şifreyi Güncelle</button>
             </form>
