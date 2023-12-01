@@ -37,6 +37,8 @@ if (isLoggedIn()) {
                         $stmt->close();
                         mysqli_close($baglanti);
                         $pswdmessage = "Şifreniz değiştirildi.<br>";
+                        header("Location: index.php");
+                        exit();
                     }
                 } else {
                     $pswdErr = "Yeni şifreniz eşleşmiyor.<br>";
