@@ -31,10 +31,10 @@ if (isLoggedIn()) {
                         $pswdErr = "Şifreniz en fazla 15 haneli olmalı.<br>";
                     } else {
                         $hash_pswd = password_hash($newpswd, PASSWORD_DEFAULT);
-                        $stmt = mysqli_prepare($baglanti, "UPDATE users SET sifre= ? WHERE id= ?");
-                        mysqli_stmt_bind_param($stmt, "si", $hash_pswd, $musteri_id);
-                        mysqli_stmt_execute($stmt);
-                        mysqli_stmt_close($stmt);
+                        $stmt = $conn->prepare("UPDATE users SET sifre = ? WHERE id = ?");
+                        $stmt->bind_param("si", $newpswd, $musteri_id);
+                        $stmt->execute();
+                        $stmt->close();
                         mysqli_close($baglanti);
                         $pswdmessage = "Şifreniz değiştirildi.<br>";
                     }
