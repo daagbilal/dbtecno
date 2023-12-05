@@ -47,6 +47,7 @@
     <?php
     if (isset($_GET["id"])) {
         $id = $_GET["id"];
+        $product_category = "";
         if ($id == 1) {
             $product_category = db_products($baglanti, "computers");
             $baslik = "Bilgisayarlar";
@@ -63,10 +64,10 @@
             $product_category = db_products($baglanti, "smart_watchs");
             $baslik = "Akıllı Saatler";
         }
-        if ($product_category) :
+        if (!empty($product_category)) {
             echo "<h2 class='baslik' style='padding-top: 30px;'>$baslik</h2>";
             echo "<div class='content'>";
-            foreach ($product_category as $urun) :
+            foreach ($product_category as $urun) {
                 echo "<a href='pages/urun_detay.php?kod=$urun[urun_kodu]' class='product' title = '$urun[marka] $urun[model] $urun[seri]'>";
                 echo "<form action='libs/sepete_ekle.php' method='post'>";
                 echo "<img src='image/$urun[resim_adi]' alt = '$urun[marka] $urun[model] $urun[fiyat]'>";
@@ -77,9 +78,11 @@
                 echo "<button class='sepetekle1' type='submit' title = 'Sepete Ekle'>Sepete Ekle</button>";
                 echo "</form>";
                 echo "</a>";
-            endforeach;
+            }
             echo "</div>";
-        endif;
+        } else {
+            header("Location: index.php");
+        }
     } else {
         for ($x = 1; $x <= 5; $x++) {
             if ($x == 1) {
@@ -99,10 +102,10 @@
                 $baslik = "Popüler Saatler";
             }
 
-            if ($product) :
+            if (!empty($product)) {
                 echo "<h2 class='baslik' style='padding-top: 30px;'>$baslik</h2>";
                 echo "<div class='content'>";
-                foreach ($product as $urun) :
+                foreach ($product as $urun) {
                     echo "<a href='pages/urun_detay.php?kod=$urun[urun_kodu]' class='product' title = '$urun[marka] $urun[model] $urun[seri]'>";
                     echo "<form action='libs/sepete_ekle.php' method='post'>";
                     echo "<img src='image/$urun[resim_adi]' alt ='$urun[marka] $urun[model] $urun[seri]'>";
@@ -113,9 +116,9 @@
                     echo "<button class='sepetekle1' type='submit' title = 'Sepete Ekle'>Sepete Ekle</button>";
                     echo "</form>";
                     echo "</a>";
-                endforeach;
+                }
                 echo "</div>";
-            endif;
+            }
         }
     }
     ?>

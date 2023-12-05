@@ -1,11 +1,13 @@
 <?php require_once("../parts/config.php"); ?>
 <?php require("../libs/functions.php"); ?>
+
 <?php session_start(); ?>
 <?php
 if (!isset($_GET["kod"])) {
     header("Location: ../index.php");
 }
 $id = $_GET["kod"];
+$urun = "";
 
 if ($id[0] == 1) {
     $urun = db_product($baglanti, "computers", $id);
@@ -17,6 +19,10 @@ if ($id[0] == 1) {
     $urun = db_product($baglanti, "tablets", $id);
 } elseif ($id[0] == 5) {
     $urun = db_product($baglanti, "smart_watchs", $id);
+}
+
+if (empty($urun)) {
+    header("Location: ../index.php");
 }
 
 ?>
