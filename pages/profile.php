@@ -114,20 +114,41 @@ if (isLoggedIn()) {
                 } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
                     $emailErr = "Geçersiz e-posta biçimi.";
                 } else {
-                    $email = safe_html($_POST["email"]);
+                    $sql = "SELECT id FROM users WHERE e_posta=?";
+
+                    if ($stmt = mysqli_prepare($baglanti, $sql)) {
+                        $param_email = safe_html($_POST["email"]);
+                        mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+                        if (mysqli_stmt_execute($stmt)) {
+                            mysqli_stmt_store_result($stmt);
+
+                            if (mysqli_stmt_num_rows($stmt) == 1) {
+                                $emailErr = "E-Posta zaten kayıtlı.";
+                            } else {
+                                $email = safe_html($_POST["email"]);
+                            }
+                        } else {
+                            echo mysqli_error($baglanti);
+                            echo "Bir Hata Oluştu.";
+                        }
+                    }
                 }
 
-                $stmt = mysqli_prepare($baglanti, "UPDATE users SET telefon = ?, e_posta = ? WHERE id= ?");
-                mysqli_stmt_bind_param($stmt, "ssi", $param_phone, $param_email, $musteri_id);
+                if (empty($phoneErr) && (empty($emailErr))) {
+                    $stmt = mysqli_prepare($baglanti, "UPDATE users SET telefon = ?, e_posta = ? WHERE id= ?");
+                    mysqli_stmt_bind_param($stmt, "ssi", $param_phone, $param_email, $musteri_id);
 
-                $param_phone = $phone;
-                $param_email = $email;
+                    $param_phone = $phone;
+                    $param_email = $email;
 
-                if (mysqli_stmt_execute($stmt)) {
-                    $message = "Bilgileriniz değiştirildi.";
-                } else {
-                    $message = "Bir hata oluştu.";
+                    if (mysqli_stmt_execute($stmt)) {
+                        $message = "Bilgileriniz değiştirildi.";
+                    } else {
+                        $message = "Bir hata oluştu.";
+                    }
                 }
+
                 mysqli_stmt_close($stmt);
                 mysqli_close($baglanti);
             }

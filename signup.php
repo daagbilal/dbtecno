@@ -35,10 +35,10 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
         $emailErr = "Geçersiz e-posta biçimi.";
     } else {
 
-        $sql = "SELECT id fROM users WHERE e_posta=?";
+        $sql = "SELECT id FROM users WHERE e_posta=?";
 
         if ($stmt = mysqli_prepare($baglanti, $sql)) {
-            $param_email = trim($_POST["email"]);
+            $param_email = safe_html($_POST["email"]);
             mysqli_stmt_bind_param($stmt, "s", $param_email);
 
             if (mysqli_stmt_execute($stmt)) {
