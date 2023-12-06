@@ -158,11 +158,12 @@ body {
 
 
 footer {
+    width: 100%;
     background-color: white;
     color: black;
     text-align: center;
+    padding: 20px 0;
     height: 60px;
-    padding: 20px;
     margin-top: 75px;
 }
 
@@ -422,7 +423,7 @@ tr:nth-child(even) {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 
 .user-menu {
@@ -467,10 +468,11 @@ tr:nth-child(even) {
 
 .user-pr input[type=text] {
     margin: 10px auto;
-    width: 50%;
+    width: 80%;
     padding: 5px 10px;
     border-radius: 5px;
     border-color: #181D21;
+    font-size: medium;
 }
 
 .user-pr input[type=date] {
@@ -526,6 +528,7 @@ tr:nth-child(even) {
     background-color: #0558EE;
     color: white;
 }
+
 
 
 @media (max-width: 768px) {

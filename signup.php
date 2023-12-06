@@ -47,15 +47,13 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                 if (mysqli_stmt_num_rows($stmt) == 1) {
                     $emailErr = "E-Posta zaten kayıtlı.";
                 } else {
-                    $email = $_POST["email"];
+                    $email = safe_html($_POST["email"]);
                 }
             } else {
                 echo mysqli_error($baglanti);
                 echo "Bir Hata Oluştu.";
             }
         }
-
-        $email = safe_html($_POST["email"]);
     }
     if (empty($_POST["password"]) or empty($_POST["repassword"])) {
         $passwordErr = "Lütfen şifre giriniz.";

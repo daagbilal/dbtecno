@@ -5,7 +5,7 @@ session_start();
 if (isLoggedIn()) {
     $musteri_id = $_SESSION["musteri_id"];
 
-    $result = mysqli_query($baglanti, "SELECT id,ad,soyad,dogum_tarih FROM users WHERE id = '$musteri_id'");
+    $result = mysqli_query($baglanti, "SELECT * FROM users WHERE id = '$musteri_id'");
     $bilgi = mysqli_fetch_assoc($result);
 } else {
     header("Location: ../index.php");
@@ -31,7 +31,7 @@ if (isLoggedIn()) {
 
         if ($_GET["page"] == 1) {
 
-            $pswdErr = $newpswdErr = $pswdmessage = "";
+            $pswdErr = $newpswdErr = $pswdmessage = $message = "";
 
             if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-pswd"])) {
                 $mevcut_sifre = safe_html($_POST["password"]);
@@ -56,10 +56,13 @@ if (isLoggedIn()) {
                                 $hash_pswd = password_hash($newpswd, PASSWORD_DEFAULT);
                                 $stmt = mysqli_prepare($baglanti, "UPDATE users SET sifre= ? WHERE id= ?");
                                 mysqli_stmt_bind_param($stmt, "si", $hash_pswd, $musteri_id);
-                                mysqli_stmt_execute($stmt);
+                                if (mysqli_stmt_execute($stmt)) {
+                                    $pswdmessage = "Şifreniz değiştirildi.<br>";
+                                } else {
+                                    $pswdmessage = "Bir hata oluştu.";
+                                }
                                 mysqli_stmt_close($stmt);
                                 mysqli_close($baglanti);
-                                $pswdmessage = "Şifreniz değiştirildi.<br>";
                             }
                         } else {
                             $pswdErr = "Yeni şifreniz eşleşmiyor.<br>";
@@ -72,7 +75,6 @@ if (isLoggedIn()) {
                 }
             }
 
-
             if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-user"])) {
 
                 $stmt = mysqli_prepare($baglanti, "UPDATE users SET ad = ?, soyad = ?, dogum_tarih = ? WHERE id = ?");
@@ -82,11 +84,52 @@ if (isLoggedIn()) {
                 $soyad = safe_html($_POST["soyad"]);
                 $dogum_tarih = safe_html($_POST["tarih"]);
 
-                mysqli_stmt_execute($stmt);
+                if (mysqli_stmt_execute($stmt)) {
+                    $message = "Bilgileriniz değiştirildi.";
+
+                    $_SESSION["ad"] = $ad;
+                } else {
+                    $message = "Bir hata oluştu.";
+                }
                 mysqli_stmt_close($stmt);
                 mysqli_close($baglanti);
+            }
+        } elseif ($_GET["page"] == 2) {
+            $phone = $email = "";
+            $phoneErr = $emailErr = $message = "";
 
-                $_SESSION["ad"] = $ad;
+            if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-contact"])) {
+
+                if (empty($_POST["phone"])) {
+                    $phoneErr = "Lütfen telefon numaranızı giriniz.";
+                } elseif (!filter_var($_POST["phone"], FILTER_VALIDATE_INT)) {
+                    $phoneErr = "Telefon numarası sayısal değer içermeli.";
+                } elseif (!preg_match('/^\d{10}$/', $_POST["phone"])) {
+                    $phoneErr = "Telefon Numaranız 10 haneli olmalı.";
+                } else {
+                    $phone = safe_html($_POST["phone"]);
+                }
+                if (empty($_POST["email"])) {
+                    $emailErr = "Lütfen e-posta adresi giriniz.";
+                } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                    $emailErr = "Geçersiz e-posta biçimi.";
+                } else {
+                    $email = safe_html($_POST["email"]);
+                }
+
+                $stmt = mysqli_prepare($baglanti, "UPDATE users SET telefon = ?, e_posta = ? WHERE id= ?");
+                mysqli_stmt_bind_param($stmt, "ssi", $param_phone, $param_email, $musteri_id);
+
+                $param_phone = $phone;
+                $param_email = $email;
+
+                if (mysqli_stmt_execute($stmt)) {
+                    $message = "Bilgileriniz değiştirildi.";
+                } else {
+                    $message = "Bir hata oluştu.";
+                }
+                mysqli_stmt_close($stmt);
+                mysqli_close($baglanti);
             }
         } else {
             header("Location: ../index.php");
@@ -115,6 +158,7 @@ if (isLoggedIn()) {
                                                                         } else {
                                                                             echo $bilgi["dogum_tarih"];
                                                                         } ?>"><br>
+                    <span class="uyari"><?php echo $message ?></span>
 
                     <button type="submit" name="update-user">Güncelle</button>
                 </form>
@@ -135,6 +179,30 @@ if (isLoggedIn()) {
                 </form>
             </div>
     </div>
+<?php endif; ?>
+<?php if ($_GET["page"] == 2) : ?>
+    <div class="user-pr">
+        <form action="profile.php?page=2" method="post">
+            <h3>İletişim Bilgilerim</h3>
+            <label for="phone">Telefon Numarası:</label><br>
+            <input type="text" name="phone" id="phone" value="<?php if (isset($_POST["update-contact"])) {
+                                                                    echo $phone;
+                                                                } else {
+                                                                    echo $bilgi["telefon"];
+                                                                } ?>"><br>
+            <span><?php echo $phoneErr ?></span>
+            <label for="email">E-Posta Adresi:</label><br>
+            <input type="text" name="email" id="email" value="<?php if (isset($_POST["update-contact"])) {
+                                                                    echo $email;
+                                                                } else {
+                                                                    echo $bilgi["e_posta"];
+                                                                } ?>"><br>
+            <span><?php echo $emailErr ?></span>
+            <span><?php echo $message ?></span>
+            <button type="submit" name="update-contact">Güncelle</button>
+        </form>
+    </div>
+
 <?php endif; ?>
 <?php include("../parts/footer.php") ?>
 
