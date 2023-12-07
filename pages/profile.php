@@ -223,6 +223,19 @@ if (isLoggedIn()) {
             <button type="submit" name="update-contact">Güncelle</button>
         </form>
     </div>
+    <div class="address">
+        <div class="_address">
+            <h3>Adreslerim</h3>
+            <button>Adres Ekle</button>
+            <div class="all_address">
+                <div class="adres">
+                    <div class="address_title"><b>..</b></div>
+                    <div class="address_text">...</div>
+                    <button>Düzenle</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php endif; ?>
 <?php include("../parts/footer.php") ?>

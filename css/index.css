@@ -394,7 +394,11 @@ tr:nth-child(even) {
     border: none;
     border-radius: 5px;
     font-size: 15px;
+    transition: 0.5s;
+}
 
+.urun_kaldir:hover {
+    background-color: #0557eebb;
 }
 
 .sepet-tutar {
@@ -415,6 +419,11 @@ tr:nth-child(even) {
     border-radius: 5px;
     text-align: center;
     font-size: 20px;
+    transition: 0.5s;
+}
+
+.siparis_ver:hover {
+    background-color: #0557eebb;
 }
 
 .profile-content {
@@ -481,10 +490,7 @@ tr:nth-child(even) {
     padding: 5px 10px;
     border-radius: 5px;
     border-color: #181D21;
-}
-
-.user-pr input[type=radio] {
-    margin: 10px auto;
+    font-size: medium;
 }
 
 .user-pr button {
@@ -495,10 +501,15 @@ tr:nth-child(even) {
     border: none;
     background-color: #0558EE;
     color: white;
+    transition: 0.5s;
+}
+
+.user-pr button:hover {
+    background-color: #0557eebb;
 }
 
 .pswd {
-    width: 32.5%;
+    width: 35%;
     height: 450px;
     border: 1px solid grey;
     border-radius: 8px;
@@ -527,7 +538,58 @@ tr:nth-child(even) {
     border: none;
     background-color: #0558EE;
     color: white;
+    transition: 0.5s;
 }
+
+.pswd button:hover {
+    background-color: #0557eebb;
+}
+
+.address {
+    width: 35%;
+    height: 450px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+._address {
+    width: 90%;
+
+}
+
+._address button {
+    margin: 0 auto;
+    padding: 10px;
+    width: 40%;
+    border-radius: 5px;
+    border: none;
+    background-color: #0558EE;
+    color: white;
+    transition: 0.5s;
+}
+
+._address button:hover {
+    background-color: #0557eebb;
+}
+
+.all_address {
+    margin-top: 10px;
+    width: 100%;
+    height: 300px;
+    overflow-x: auto;
+}
+
+.adres {
+    width: 70%;
+    border: 1px solid grey;
+    margin: 10px 0;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 
 
 
@@ -570,6 +632,7 @@ tr:nth-child(even) {
 
     .urun div {
         width: 90%;
+        margin-top: 10px;
     }
 
     table {
@@ -598,6 +661,13 @@ tr:nth-child(even) {
         min-width: 130px;
     }
 
+    .user-menu {
+        display: flex;
+        justify-content: space-around;
+        width: 95%;
+        height: 250px;
+    }
+
     .sepet {
         width: 100%;
     }
@@ -622,16 +692,14 @@ tr:nth-child(even) {
         justify-content: space-around;
     }
 
-    .user-menu {
-        display: none;
-    }
-
     .user-pr {
         width: 52.5%;
+        margin-top: 10px;
     }
 
-    .psw {
+    .pswd {
         width: 42.5%;
+        margin-top: 10px;
     }
 
     .user-pr input[type=text] {
@@ -644,6 +712,11 @@ tr:nth-child(even) {
 
     .sepet-content {
         width: 90%;
+    }
+
+    .address {
+        width: 42.5%;
+        margin-top: 10px;
     }
 }
 
@@ -676,13 +749,20 @@ tr:nth-child(even) {
         width: 90%;
     }
 
+    .user-menu {
+        width: 100%;
+    }
+
     .user-pr {
         width: 100%;
     }
 
     .pswd {
         width: 100%;
-        margin-top: 10px;
+    }
+
+    .address {
+        width: 100%;
     }
 
 }
