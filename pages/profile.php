@@ -97,6 +97,11 @@ if (isLoggedIn()) {
         } elseif ($_GET["page"] == 2) {
             $phone = $email = "";
             $phoneErr = $emailErr = $message = "";
+            $stmt = mysqli_prepare($baglanti, "SELECT title,adres FROM adres WHERE musteri_id= ?");
+            mysqli_stmt_bind_param($stmt, "i", $musteri_id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $address = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
             if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["update-contact"])) {
 
@@ -228,11 +233,15 @@ if (isLoggedIn()) {
             <h3>Adreslerim</h3>
             <button>Adres Ekle</button>
             <div class="all_address">
-                <div class="adres">
-                    <div class="address_title"><b>..</b></div>
-                    <div class="address_text">...</div>
-                    <button>Düzenle</button>
-                </div>
+                <?php if (!empty($address)) : ?>
+                    <?php foreach ($address as $adres) : ?>
+                        <div class="adres">
+                            <div class="address_title"><b><?php echo $adres["title"] ?></b></div>
+                            <div class="address_text"><?php echo $adres["adres"] ?></div>
+                            <button>Düzenle</button>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

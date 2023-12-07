@@ -583,11 +583,15 @@ tr:nth-child(even) {
 }
 
 .adres {
-    width: 70%;
+    width: 80%;
     border: 1px solid grey;
     margin: 10px 0;
     padding: 5px;
     border-radius: 5px;
+}
+
+.address_text {
+    margin: 5px 0;
 }
 
 
