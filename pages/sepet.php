@@ -16,10 +16,13 @@
     <?php include("../parts/index_header.php"); ?>
     <?php
     if (isLoggedIn()) {
+        $stmt = mysqli_prepare($baglanti, "SELECT musteri_id, urun_kodu, miktar FROM sepet WHERE musteri_id= ?");
+        mysqli_stmt_bind_param($stmt, "i", $musteri_id);
         $musteri_id = $_SESSION["musteri_id"];
-        $sql = "SELECT musteri_id, urun_kodu, miktar FROM sepet WHERE musteri_id='$musteri_id'";
-        $sepet_urunler = mysqli_query($baglanti, $sql);
-        $sepet_products = mysqli_fetch_all($sepet_urunler, MYSQLI_ASSOC);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $sepet_products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_stmt_close($stmt);
         $tutar = 0;
     } else {
         header("Location: ../login.php");
@@ -32,7 +35,7 @@
             <ul style="padding: 0; margin:0;">
                 <?php
                 if ($sepet_products) {
-                    foreach ($sepet_products as $sepet_product) :
+                    foreach ($sepet_products as $sepet_product) {
                         $sql = "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat FROM computers
                             WHERE urun_kodu='$sepet_product[urun_kodu]'
                             UNION
@@ -65,7 +68,7 @@
                                 </form>
                             </li>";
                         $tutar += ($product["fiyat"]);
-                    endforeach;
+                    }
                 } else {
                     echo "<h2 style = 'text-align: center;'>Sepetiniz Boş</h2>";
                 }

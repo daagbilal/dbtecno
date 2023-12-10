@@ -3,9 +3,11 @@ require("../parts/config.php");
 require("../libs/functions.php");
 session_start();
 if (isLoggedIn()) {
+    $stmt = mysqli_prepare($baglanti, "SELECT * FROM users WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $musteri_id);
     $musteri_id = $_SESSION["musteri_id"];
-
-    $result = mysqli_query($baglanti, "SELECT * FROM users WHERE id = '$musteri_id'");
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     $bilgi = mysqli_fetch_assoc($result);
 } else {
     header("Location: ../index.php");

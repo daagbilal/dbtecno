@@ -2,8 +2,12 @@
 
 function db_product($baglanti, string $product_ctg, $id)
 {
-    $result_urun = mysqli_query($baglanti, "SELECT * FROM $product_ctg WHERE urun_kodu=" . $id);
-    return mysqli_fetch_assoc($result_urun);
+    $stmt = mysqli_prepare($baglanti, "SELECT * FROM $product_ctg WHERE urun_kodu= ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+    return mysqli_fetch_assoc($result);
 }
 
 function db_products($baglanti, string $product_ctg)
