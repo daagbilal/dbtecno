@@ -99,7 +99,7 @@ if (isLoggedIn()) {
         } elseif ($_GET["page"] == 2) {
             $phone = $email = "";
             $phoneErr = $emailErr = $message = "";
-            $stmt = mysqli_prepare($baglanti, "SELECT title,adres FROM adres WHERE musteri_id= ?");
+            $stmt = mysqli_prepare($baglanti, "SELECT adres_id,title,adres FROM adres WHERE musteri_id= ?");
             mysqli_stmt_bind_param($stmt, "i", $musteri_id);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
@@ -238,9 +238,11 @@ if (isLoggedIn()) {
                 <?php if (!empty($address)) : ?>
                     <?php foreach ($address as $adres) : ?>
                         <div class="adres">
-                            <div class="address_title"><b><?php echo $adres["title"] ?></b></div>
-                            <div class="address_text"><?php echo $adres["adres"] ?></div>
-                            <button>Düzenle</button>
+                            <form action="adres.php" method="post">
+                                <div class="address_title"><b><?php echo $adres["title"] ?></b></div>
+                                <div class="address_text"><?php echo $adres["adres"] ?></div>
+                                <button type="submit" name="adres_duzenle">Düzenle</button>
+                            </form>
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
