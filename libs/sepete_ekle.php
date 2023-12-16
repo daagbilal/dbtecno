@@ -1,6 +1,6 @@
 <?php
 require_once("../parts/config.php");
-require_once("../libs/functions.php");
+require("../libs/functions.php");
 session_start();
 if (isLoggedIn()) {
     $sql = "INSERT INTO sepet (musteri_id, urun_kodu, miktar, add_time) VALUES (?, ?, ?, ?)";
@@ -12,11 +12,10 @@ if (isLoggedIn()) {
     mysqli_stmt_bind_param($stmt, "iiis", $musteri_id, $urun_id, $miktar, $add_time);
 
     if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_close($stmt);
+        mysqli_close($baglanti);
         header("Location: ../pages/sepet.php");
     }
 } else {
     header("Location: ../login.php");
 }
-
-mysqli_stmt_close($stmt);
-mysqli_close($baglanti);

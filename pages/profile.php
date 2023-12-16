@@ -1,5 +1,5 @@
 <?php
-require("../parts/config.php");
+require_once("../parts/config.php");
 require("../libs/functions.php");
 session_start();
 if (isLoggedIn()) {
@@ -21,6 +21,11 @@ if (isLoggedIn()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profilim</title>
     <link rel="stylesheet" href="../css/index.css">
+    <script>
+        function add() {
+            window.location.href = "adres.php?page=adres-ekle";
+        }
+    </script>
 </head>
 
 <body style="background-color: #daddd678;">
@@ -233,7 +238,7 @@ if (isLoggedIn()) {
     <div class="address">
         <div class="_address">
             <h3>Adreslerim</h3>
-            <button>Adres Ekle</button>
+            <button onclick="add()">Adres Ekle</button>
             <div class="all_address">
                 <?php if (!empty($address)) : ?>
                     <?php foreach ($address as $adres) : ?>

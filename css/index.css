@@ -295,6 +295,7 @@ tr:nth-child(even) {
     color: white;
     border-radius: 8px;
     transition: 0.5s;
+
 }
 
 .button:hover {
@@ -502,6 +503,7 @@ tr:nth-child(even) {
     background-color: #0558EE;
     color: white;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .user-pr button:hover {
@@ -539,6 +541,7 @@ tr:nth-child(even) {
     background-color: #0558EE;
     color: white;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .pswd button:hover {
@@ -569,6 +572,7 @@ tr:nth-child(even) {
     background-color: #0558EE;
     color: white;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 ._address button:hover {
@@ -634,6 +638,7 @@ tr:nth-child(even) {
     color: white;
     transition: 0.5s;
     margin: 10px 0;
+    cursor: pointer;
 }
 
 .address-form button:hover {

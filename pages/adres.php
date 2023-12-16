@@ -5,7 +5,32 @@ session_start();
 
 if (isLoggedIn()) {
     $musteri_id = $_SESSION["musteri_id"];
-    if ($_GET["page"] == "adres-duzenle") {
+    $message = "";
+    if ($_GET["page"] == "adres-ekle") {
+        if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["adres-submit"])) {
+
+            $sql = "INSERT INTO adres (musteri_id,ad,soyad,telefon,title,il,ilce,adres) VALUES (?,?,?,?,?,?,?,?)";
+
+            $stmt = mysqli_prepare($baglanti, $sql);
+            mysqli_stmt_bind_param($stmt, "isssssss", $musteri_id, $name, $surname, $phone, $title, $il, $ilce, $adres);
+
+            $name = safe_html($_POST["name"]);
+            $surname = safe_html($_POST["surname"]);
+            $phone = safe_html($_POST["phone"]);
+            $title = safe_html($_POST["title"]);
+            $il = safe_html($_POST["il"]);
+            $ilce = safe_html($_POST["ilce"]);
+            $adres = safe_html($_POST["adres"]);
+
+            if (mysqli_stmt_execute($stmt)) {
+                header("Location: profile.php?page=2");
+                exit();
+            } else {
+                $message = "Bir hata oluştu.";
+            }
+            mysqli_stmt_close($stmt);
+        }
+    } elseif ($_GET["page"] == "adres-duzenle") {
         if (isset($_POST["adres-id"])) {
             $_SESSION["adres_id"] = $_POST["adres-id"];
         }
@@ -35,9 +60,13 @@ if (isLoggedIn()) {
             if (mysqli_stmt_execute($stmt)) {
                 header("Location: profile.php?page=2");
                 exit();
+            } else {
+                $message = "Bir hata oluştu.";
             }
             mysqli_stmt_close($stmt);
         }
+    } else {
+        header("Location: profile.php?page=2");
     }
 } else {
     header("Location: ../index.php");
@@ -52,50 +81,72 @@ mysqli_close($baglanti);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
+    <script>
+        function del() {
+            window.location.href = "../libs/adres_sil.php?adres_id=<?php echo $adres_id ?>";
+        }
+    </script>
     <title>Profilim</title>
 </head>
 
 <body>
     <div class="address-div">
         <?php if ($_GET["page"] == "adres-duzenle") : ?>
-            <form class="address-form" action="adres.php?page=adres-duzenle" method="post">
-                <h2>Adres Düzenle</h2>
-                <input name="name" type="text" placeholder="Ad" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                            echo $_POST["name"];
-                                                                        } else {
-                                                                            echo $bilgi["ad"];
-                                                                        } ?>"><br>
-                <input name="surname" type="text" placeholder="Soyad" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                                    echo $_POST["surname"];
-                                                                                } else {
-                                                                                    echo $bilgi["soyad"];
-                                                                                } ?>"><br>
-                <input name="phone" type="text" placeholder="Telefon(5510001234)" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                                                echo $_POST["phone"];
-                                                                                            } else {
-                                                                                                echo $bilgi["telefon"];
-                                                                                            } ?>"><br>
-                <input name="title" type="text" placeholder="Adres Başlığı" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                                        echo $_POST["title"];
-                                                                                    } else {
-                                                                                        echo $bilgi["title"];
-                                                                                    } ?>"><br>
-                <input name="il" type="text" placeholder="İl" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                            echo $_POST["il"];
-                                                                        } else {
-                                                                            echo $bilgi["il"];
-                                                                        } ?>"><br>
-                <input name="ilce" type="text" placeholder="İlçe" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                                echo $_POST["ilce"];
+            <div class="address-form">
+                <form action="adres.php?page=adres-duzenle" method="post">
+                    <h2>Adres Güncelle</h2>
+                    <input name="name" type="text" placeholder="Ad" value="<?php if (isset($_POST["adres-submit"])) {
+                                                                                echo $_POST["name"];
                                                                             } else {
-                                                                                echo $bilgi["ilce"];
-                                                                            } ?>"><br>
-                <textarea name="adres" rows="4" placeholder="Adres"><?php if (isset($_POST["adres-submit"])) {
-                                                                        echo $_POST["adres"];
-                                                                    } else {
-                                                                        echo $bilgi["adres"];
-                                                                    } ?></textarea><br>
-                <button type="submit">Vazgeç</button>
+                                                                                echo $bilgi["ad"];
+                                                                            } ?>" required><br>
+                    <input name="surname" type="text" placeholder="Soyad" value="<?php if (isset($_POST["adres-submit"])) {
+                                                                                        echo $_POST["surname"];
+                                                                                    } else {
+                                                                                        echo $bilgi["soyad"];
+                                                                                    } ?>" required><br>
+                    <input name="phone" type="text" placeholder="Telefon(5510001234)" value="<?php if (isset($_POST["adres-submit"])) {
+                                                                                                    echo $_POST["phone"];
+                                                                                                } else {
+                                                                                                    echo $bilgi["telefon"];
+                                                                                                } ?>" required><br>
+                    <input name="title" type="text" placeholder="Adres Başlığı" value="<?php if (isset($_POST["adres-submit"])) {
+                                                                                            echo $_POST["title"];
+                                                                                        } else {
+                                                                                            echo $bilgi["title"];
+                                                                                        } ?>" required><br>
+                    <input name="il" type="text" placeholder="İl" value="<?php if (isset($_POST["adres-submit"])) {
+                                                                                echo $_POST["il"];
+                                                                            } else {
+                                                                                echo $bilgi["il"];
+                                                                            } ?>" required><br>
+                    <input name="ilce" type="text" placeholder="İlçe" value="<?php if (isset($_POST["adres-submit"])) {
+                                                                                    echo $_POST["ilce"];
+                                                                                } else {
+                                                                                    echo $bilgi["ilce"];
+                                                                                } ?>" required><br>
+                    <textarea name="adres" rows="4" placeholder="Adres" required><?php if (isset($_POST["adres-submit"])) {
+                                                                                        echo $_POST["adres"];
+                                                                                    } else {
+                                                                                        echo $bilgi["adres"];
+                                                                                    } ?></textarea><br>
+                    <span><?php echo $message ?></span>
+                    <button type="submit" name="adres-submit">Güncelle</button>
+                </form>
+                <button onclick="del()">Adres Sil</button>
+            </div>
+        <?php endif; ?>
+        <?php if ($_GET["page"] == "adres-ekle") : ?>
+            <form class="address-form" action="adres.php?page=adres-ekle" method="post">
+                <h2>Adres Ekle</h2>
+                <input name="name" type="text" placeholder="Ad" required><br>
+                <input name="surname" type="text" placeholder="Soyad" required><br>
+                <input name="phone" type="text" placeholder="Telefon(5510001234)" required><br>
+                <input name="title" type="text" placeholder="Adres Başlığı" required><br>
+                <input name="il" type="text" placeholder="İl" required><br>
+                <input name="ilce" type="text" placeholder="İlçe" required><br>
+                <textarea name="adres" rows="4" placeholder="Adres" required></textarea><br>
+                <span><?php echo $message ?></span>
                 <button type="submit" name="adres-submit">Kaydet</button>
             </form>
         <?php endif; ?>
