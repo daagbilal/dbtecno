@@ -238,9 +238,10 @@ if (isLoggedIn()) {
                 <?php if (!empty($address)) : ?>
                     <?php foreach ($address as $adres) : ?>
                         <div class="adres">
-                            <form action="adres.php" method="post">
+                            <form action="adres.php?page=adres-duzenle" method="post">
                                 <div class="address_title"><b><?php echo $adres["title"] ?></b></div>
                                 <div class="address_text"><?php echo $adres["adres"] ?></div>
+                                <input type="hidden" name="adres_id" value="<?php echo $adres["adres_id"] ?>">
                                 <button type="submit" name="adres_duzenle">Düzenle</button>
                             </form>
                         </div>

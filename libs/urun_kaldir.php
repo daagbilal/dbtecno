@@ -7,12 +7,14 @@ if (isset($_POST["product_id"]) && isLoggedIn()) {
     $urun_kodu = $_POST["product_id"];
     $musteri_id = $_SESSION["musteri_id"];
 
-    $sql = "DELETE FROM `sepet` WHERE urun_kodu = $urun_kodu AND musteri_id = $musteri_id;";
+    $sql = "DELETE FROM sepet WHERE urun_kodu = ? AND musteri_id = ?;";
 
-    $result = mysqli_query($baglanti, $sql);
+    $stmt = mysqli_prepare($baglanti, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $urun_kodu, $musteri_id);
 
-    if ($result) {
+    if (mysqli_stmt_execute($stmt)) {
         header("Location: ../pages/sepet.php");
+        mysqli_stmt_close($stmt);
     }
 
     mysqli_close($baglanti);

@@ -13,6 +13,7 @@ function db_product($baglanti, string $product_ctg, $id)
 function db_products($baglanti, string $product_ctg)
 {
     $products_category = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat FROM $product_ctg");
+
     return mysqli_fetch_all($products_category, MYSQLI_ASSOC);
 }
 
