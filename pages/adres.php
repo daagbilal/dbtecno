@@ -6,8 +6,8 @@ session_start();
 if (isLoggedIn()) {
     $musteri_id = $_SESSION["musteri_id"];
     if ($_GET["page"] == "adres-duzenle") {
-        if (isset($_POST["adres_id"])) {
-            $_SESSION["adres_id"] = $_POST["adres_id"];
+        if (isset($_POST["adres-id"])) {
+            $_SESSION["adres_id"] = $_POST["adres-id"];
         }
         $adres_id = $_SESSION["adres_id"];
         $stmt = mysqli_prepare($baglanti, "SELECT * FROM adres WHERE adres_id = ?");
@@ -17,7 +17,7 @@ if (isLoggedIn()) {
         $bilgi = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
 
-        if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["adres_submit"])) {
+        if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["adres-submit"])) {
 
             $sql = "UPDATE adres SET ad = ?, soyad = ?, telefon = ?, title = ?, il = ?, ilce = ?, adres = ? WHERE adres_id = ?";
 
@@ -32,7 +32,10 @@ if (isLoggedIn()) {
             $ilce = safe_html($_POST["ilce"]);
             $adres = safe_html($_POST["adres"]);
 
-            mysqli_stmt_execute($stmt);
+            if (mysqli_stmt_execute($stmt)) {
+                header("Location: profile.php?page=2");
+                exit();
+            }
             mysqli_stmt_close($stmt);
         }
     }
@@ -92,6 +95,7 @@ mysqli_close($baglanti);
                                                                     } else {
                                                                         echo $bilgi["adres"];
                                                                     } ?></textarea><br>
+                <button type="submit">Vazgeç</button>
                 <button type="submit" name="adres-submit">Kaydet</button>
             </form>
         <?php endif; ?>
