@@ -23,18 +23,24 @@ if ($id[0] == 1) {
 } elseif ($id[0] == 5) {
     $urun = db_product($baglanti, "smart_watchs", $id);
 }
+
+$favorite = false;
+
 if (empty($urun)) {
     header("Location: ../index.php");
 }
-$sql = "SELECT * FROM favorites WHERE urun_kodu= ?";
-$stmt = mysqli_prepare($baglanti, $sql);
-mysqli_stmt_bind_param($stmt, "i", $id);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_store_result($stmt);
-if (mysqli_stmt_num_rows($stmt) == 1) {
-    $favorite = true;
-} else {
-    $favorite = false;
+if (isLoggedIn()) {
+    $musteri_id = $_SESSION["musteri_id"];
+    $sql = "SELECT * FROM favorites WHERE urun_kodu= ? AND musteri_id = ?";
+    $stmt = mysqli_prepare($baglanti, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $id, $musteri_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    if (mysqli_stmt_num_rows($stmt) == 1) {
+        $favorite = true;
+    } else {
+        $favorite = false;
+    }
 }
 
 
