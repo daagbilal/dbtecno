@@ -22,7 +22,7 @@ if (isset($_SESSION["ad"])) {
                                 <li><h4 style='margin:0 ; padding:0 ;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>$name</h4></li>
                                 <li><a href='../pages/siparis.php'>Siparişlerim</a></li>
                                 <li><a href='../pages/profile.php?page=1'>Profilim</a></li>
-                                <li><a href='../pages/favorites.php'>Beğendiklerim</a></li>
+                                <li><a href='../pages/favorites.php'>Favorilerim</a></li>
                                 <li><a href='../pages/evaluations.php'>Değerlendirmelerim</a></li>
                                 <li><a href='../libs/logout.php'>Çıkış</a></li>
                             </ul>

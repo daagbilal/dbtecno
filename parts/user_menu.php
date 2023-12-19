@@ -4,8 +4,8 @@
         <li><a href="../pages/sepet.php">Sepetim</a></li>
         <li><a href="../pages/siparis.php">Siparişlerim</a></li>
         <li><a href="../pages/profile.php?page=1">Profilim</a></li>
+        <li><a href="../pages/favorites.php">Favorilerim</a></li>
         <li><a href="../pages/evaluations.php">Değerlendirmelerim</a></li>
-        <li><a href="../pages/favorites.php">Beğenmelerim</a></li>
     </ul>
     <ul>
         <h4>Kullanıcı Bilgilerim</h4>

@@ -664,6 +664,16 @@ tr:nth-child(even) {
     background-color: #0557eebb;
 }
 
+.favorites-content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 400px;
+    width: 75%;
+}
+
 
 
 
@@ -795,6 +805,10 @@ tr:nth-child(even) {
 
     .address-form {
         width: 70%;
+    }
+
+    .favorites-content {
+        width: 100%;
     }
 }
 
