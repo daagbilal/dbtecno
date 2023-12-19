@@ -28,7 +28,7 @@
         header("Location: ../login.php");
     }
     ?>
-    <h1 class="sepetim-baslik" style="text-align: center; margin:0; padding:0;">Sepetim</h1>
+    <h1 class="sepetim-baslik" style="text-align: center;">Sepetim</h1>
     <div class="sepet-content">
         <?php include("../parts/user_menu.php") ?>
         <div class="sepet">
@@ -77,15 +77,10 @@
         </div>
         <?php
         if ($sepet_products) {
-            $kargo_ucret = 25;
             echo "<div class='sepet-tutar'>
-                    <form style='text-align: center;' action='../libs/siparis_ekle.php' method= 'post'>
-                    <h4>Ürünler: $tutar TL</h4>
-                    <h4>Kargo Ücreti: $kargo_ucret TL</h4>";
-            $tutar += $kargo_ucret;
+                    <h4>Ürünler: $tutar TL</h4>";
             echo "<h2 style='text-align: center;'>Toplam Tutar: $tutar TL</h2>
-                    <button class='siparis_ver' type= 'submit'>Sipariş Ver</button>
-                    </form>
+                    <button class='siparis_ver' onclick='siparis()'>Sipariş Ver</button>
                 </div>";
         }
         ?>

@@ -1,7 +1,10 @@
-<?php require_once("../parts/config.php"); ?>
-<?php require("../libs/functions.php"); ?>
+<?php
 
-<?php session_start(); ?>
+use function PHPSTORM_META\sql_injection_subst;
+
+require_once("../parts/config.php"); ?>
+<?php require("../libs/functions.php"); ?>
+<?php session_start() ?>
 <?php
 if (!isset($_GET["kod"])) {
     header("Location: ../index.php");
@@ -20,10 +23,21 @@ if ($id[0] == 1) {
 } elseif ($id[0] == 5) {
     $urun = db_product($baglanti, "smart_watchs", $id);
 }
-
 if (empty($urun)) {
     header("Location: ../index.php");
 }
+$sql = "SELECT * FROM favorites WHERE urun_kodu= ?";
+$stmt = mysqli_prepare($baglanti, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_store_result($stmt);
+if (mysqli_stmt_num_rows($stmt) == 1) {
+    $favorite = true;
+} else {
+    $favorite = false;
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -36,6 +50,7 @@ if (empty($urun)) {
         <?php echo $urun["marka"] . " " . $urun["model"]; ?>
     </title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"   />
 </head>
 
 <body>
@@ -52,22 +67,32 @@ if (empty($urun)) {
     </script>
     <?php include("../parts/index_header.php"); ?>
     <?php include("../parts/categories.php"); ?>
-    <?php
-    echo "<div class='urun'>
-            <img src='../image/$urun[resim_adi]' alt='$urun[marka] $urun[model] $urun[seri]'>
-            <div style= 'border: 1px solid grey;'>
-                <div>
-                    <form action = '../libs/sepete_ekle.php' method = 'post'>
-                        <h2>$urun[marka] $urun[model] $urun[seri]</h2>
-                        <h1>$urun[fiyat] TL</h1>
-                        <h3>Stok:  $urun[stok]</h3>
-                        <input type='hidden' name='product_id' value='$urun[urun_kodu]'>
-                        <button class = 'sepetekle2' type='submit'>Sepete Ekle</button>
+    <div class='urun'>
+        <img src='../image/<?php echo $urun['resim_adi'] ?>' alt='<?php echo "$urun[marka] $urun[model] $urun[seri]" ?>'>
+        <div style='border: 1px solid grey;'>
+            <div>
+                <h2><?php echo "$urun[marka] $urun[model] $urun[seri]" ?></h2>
+                <h1><?php echo "$urun[fiyat] TL" ?></h1>
+                <h3><?php echo "Stok: $urun[stok]" ?></h3>
+                <?php if ($favorite == true) : ?>
+                    <form action='../libs/rm_favorite.php' method='post'>
+                        <input type='hidden' name='product_id' value='<?php echo $urun['urun_kodu'] ?>'>
+                        <button class='favorite-button' type='submit'><i class="fa-solid fa-heart fa-2xl"></i></button>
                     </form>
-                </div>
+                <?php endif; ?>
+                <?php if ($favorite == false) : ?>
+                    <form action='../libs/add_favorite.php' method='post'>
+                        <input type='hidden' name='product_id' value='<?php echo $urun['urun_kodu'] ?>'>
+                        <button class='favorite-button' type='submit'><i class="fa-regular fa-heart fa-2xl"></i></button>
+                    </form>
+                <?php endif; ?>
+                <form action='../libs/sepete_ekle.php' method='post'>
+                    <input type='hidden' name='product_id' value='<?php echo $urun['urun_kodu'] ?>'>
+                    <button class='sepetekle2' type='submit'>Sepete Ekle</button>
+                </form>
             </div>
-        </div>"
-    ?>
+        </div>
+    </div>
     <?php
     if ($id[0] == 1) {
         echo "<div class='ozellikler'>
