@@ -43,6 +43,7 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                             $_SESSION["loggedIn"] = true;
                             $_SESSION["musteri_id"] = $id;
                             $_SESSION["ad"] = $ad;
+                            $_SESSION["soyad"] = $soyad;
                             $_SESSION["login_time"] = date('Y-m-d H:i:s');
                             $stmt = mysqli_prepare($baglanti, "UPDATE users SET login_time=? WHERE id=?");
                             mysqli_stmt_bind_param($stmt, "si", $login_time, $id);

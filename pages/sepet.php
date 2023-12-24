@@ -28,7 +28,7 @@
         header("Location: ../login.php");
     }
     ?>
-    <h1 class="sepetim-baslik" style="text-align: center;">Sepetim</h1>
+    <h2 class="sepetim-baslik" style="text-align: center;">Sepetim</h2>
     <div class="sepet-content">
         <?php include("../parts/user_menu.php") ?>
         <div class="sepet">
@@ -76,7 +76,7 @@
             </ul>
         </div>
         <?php
-        if ($sepet_products) {
+        if (!empty($sepet_products)) {
             echo "<div class='sepet-tutar'>
                     <h4>Ürünler: $tutar TL</h4>";
             echo "<h2 style='text-align: center;'>Toplam Tutar: $tutar TL</h2>

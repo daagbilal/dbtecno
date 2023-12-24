@@ -24,6 +24,26 @@ if ($id[0] == 1) {
     $urun = db_product($baglanti, "smart_watchs", $id);
 }
 
+$stmt = mysqli_prepare($baglanti, "SELECT * FROM evaluations WHERE urun_kodu = ? AND onay = 1 ORDER BY add_time desc, ad LIMIT 3");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$evaluations = mysqli_fetch_all($result, MYSQLI_ASSOC);
+mysqli_stmt_close($stmt);
+
+$stmt = mysqli_prepare($baglanti, "SELECT AVG(puan) FROM evaluations WHERE urun_kodu = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result_puan = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+$result_puan = $result_puan["AVG(puan)"];
+if ($result_puan != 0) {
+    $puan = number_format($result_puan, 1, '.', '');
+} else {
+    $puan = 0;
+}
+
+
+
 $favorite = false;
 
 if (empty($urun)) {
@@ -75,7 +95,7 @@ if (isLoggedIn()) {
     <?php include("../parts/categories.php"); ?>
     <div class='urun'>
         <img src='../image/<?php echo $urun['resim_adi'] ?>' alt='<?php echo "$urun[marka] $urun[model] $urun[seri]" ?>'>
-        <div style='border: 1px solid grey;'>
+        <div>
             <div>
                 <h2><?php echo "$urun[marka] $urun[model] $urun[seri]" ?></h2>
                 <h1><?php echo "$urun[fiyat] TL" ?></h1>
@@ -328,6 +348,40 @@ if (isLoggedIn()) {
             </div>";
     }
     ?>
+    <div class="degerlendir_content">
+        <h2 style="width: 100%; text-align:center;">Değerlendirmeler</h2>
+        <div class="total_degerlendirme">
+            <div>
+                <h3><?php echo "$urun[marka] $urun[model] $urun[seri]" ?></h3>
+                <div>
+
+                </div>
+                <h3><?php echo $puan ?></h3>
+                <button class="evaluation-button">Değerlendir</button>
+            </div>
+        </div>
+        <div class="degerlendirmeler">
+            <?php if (!empty($evaluations)) : ?>
+                <?php foreach ($evaluations as $evaluation) : ?>
+                    <div class="degerlendirme">
+                        <div class="degerlendirme-head">
+                            <h4><?php echo "$evaluation[ad] $evaluation[soyad]" ?></h4>
+                            <div><?php echo $evaluation["add_time"] ?></div>
+                        </div>
+                        <div class="degerlendirme-star">
+
+                        </div>
+                        <div class="degerlendirme-yorum">
+                            <p><?php echo $evaluation["yorum"] ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if (empty($evaluations)) : ?>
+                <div style="font-size:24px; margin: 15px;text-align:center;">İlk değerlendirmeyi siz yapın.</div>
+            <?php endif; ?>
+        </div>
+    </div>
     <?php mysqli_close($baglanti) ?>
     <?php include("../parts/avantaj.php"); ?>
     <?php include("../parts/footer.php"); ?>

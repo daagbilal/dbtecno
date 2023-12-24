@@ -45,7 +45,7 @@
         header("Location: ../login.php");
     }
     ?>
-    <h1 class="sepetim-baslik" style="text-align: center;">Favorilerim</h1>
+    <h2 class="sepetim-baslik" style="text-align: center;">Favorilerim</h2>
     <div class="sepet-content">
         <?php include("../parts/user_menu.php") ?>
         <?php if (!empty($favorites)) : ?>
