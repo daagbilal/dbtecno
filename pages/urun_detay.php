@@ -73,20 +73,18 @@ if (mysqli_stmt_num_rows($stmt) == 1) {
 
 
 if (isLoggedIn() && isset($_POST["evaluation_submit"])) {
-    if ($degerlendirme == false) {
-        $stmt = mysqli_prepare($baglanti, "INSERT INTO evaluations (urun_kodu, urun, musteri_id, ad, soyad, puan, yorum, add_time) VALUES (?,?,?,?,?,?,?,?)");
-        mysqli_stmt_bind_param($stmt, "isississ", $id, $urun_adi, $musteri_id, $ad, $soyad, $puan, $yorum, $add_time);
-        $urun_adi = "$urun[marka] $urun[model] $urun[seri]";
-        $musteri_id = $_SESSION["musteri_id"];
-        $ad = $_SESSION["ad"];
-        $soyad = $_SESSION["soyad"];
-        $puan = 3;
-        $yorum = $_POST["yorum"];
-        $add_time = date('Y-m-d');
-        if (mysqli_stmt_execute($stmt)) {
-            mysqli_stmt_close($stmt);
-            header("location: urun_detay.php?kod=$id");
-        }
+    $stmt = mysqli_prepare($baglanti, "INSERT INTO evaluations (urun_kodu, urun, musteri_id, ad, soyad, puan, yorum, add_time) VALUES (?,?,?,?,?,?,?,?)");
+    mysqli_stmt_bind_param($stmt, "isississ", $id, $urun_adi, $musteri_id, $ad, $soyad, $puan, $yorum, $add_time);
+    $urun_adi = "$urun[marka] $urun[model] $urun[seri]";
+    $musteri_id = $_SESSION["musteri_id"];
+    $ad = $_SESSION["ad"];
+    $soyad = $_SESSION["soyad"];
+    $puan = 3;
+    $yorum = $_POST["yorum"];
+    $add_time = date('Y-m-d');
+    if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_close($stmt);
+        header("location: urun_detay.php?kod=$id");
     }
 }
 
