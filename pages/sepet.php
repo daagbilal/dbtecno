@@ -70,7 +70,7 @@
                         $tutar += ($product["fiyat"]);
                     }
                 } else {
-                    echo "<h2 style = 'text-align: center;'>Sepetiniz Boş</h2>";
+                    echo "<div style = 'text-align: center; font-size: 20px'>Sepetiniz Boş</div>";
                 }
                 ?>
             </ul>

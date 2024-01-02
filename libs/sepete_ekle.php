@@ -1,6 +1,6 @@
 <?php
 require_once("../parts/config.php");
-require("../libs/functions.php");
+require("functions.php");
 session_start();
 if (isLoggedIn()) {
     $sql = "INSERT INTO sepet (musteri_id, urun_kodu, miktar, add_time) VALUES (?, ?, ?, ?)";

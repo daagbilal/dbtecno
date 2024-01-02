@@ -1,6 +1,6 @@
 <?php
 require_once("../parts/config.php");
-require("../libs/functions.php");
+require("functions.php");
 session_start();
 if (isLoggedIn()) {
     $musteri_id = $_SESSION["musteri_id"];

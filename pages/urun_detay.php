@@ -1,8 +1,4 @@
-<?php
-
-use function PHPSTORM_META\sql_injection_subst;
-
-require_once("../parts/config.php"); ?>
+<?php require_once("../parts/config.php"); ?>
 <?php require("../libs/functions.php"); ?>
 <?php session_start() ?>
 <?php
@@ -60,6 +56,37 @@ if (isLoggedIn()) {
         $favorite = true;
     } else {
         $favorite = false;
+    }
+}
+
+$ev_ctrl = "SELECT musteri_id FROM evaluations WHERE urun_kodu =?";
+$stmt = mysqli_prepare($baglanti, $ev_ctrl);
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_store_result($stmt);
+if (mysqli_stmt_num_rows($stmt) == 1) {
+    $degerlendirme = true;
+} else {
+    $degerlendirme = false;
+}
+
+
+
+if (isLoggedIn() && isset($_POST["evaluation_submit"])) {
+    if ($degerlendirme == false) {
+        $stmt = mysqli_prepare($baglanti, "INSERT INTO evaluations (urun_kodu, urun, musteri_id, ad, soyad, puan, yorum, add_time) VALUES (?,?,?,?,?,?,?,?)");
+        mysqli_stmt_bind_param($stmt, "isississ", $id, $urun_adi, $musteri_id, $ad, $soyad, $puan, $yorum, $add_time);
+        $urun_adi = "$urun[marka] $urun[model] $urun[seri]";
+        $musteri_id = $_SESSION["musteri_id"];
+        $ad = $_SESSION["ad"];
+        $soyad = $_SESSION["soyad"];
+        $puan = 3;
+        $yorum = $_POST["yorum"];
+        $add_time = date('Y-m-d');
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_close($stmt);
+            header("location: urun_detay.php?kod=$id");
+        }
     }
 }
 
@@ -357,7 +384,12 @@ if (isLoggedIn()) {
 
                 </div>
                 <h3><?php echo $puan ?></h3>
-                <button class="evaluation-button">Değerlendir</button>
+                <?php if ($degerlendirme == false) : ?>
+                    <button class="evaluation-button" id="showReviewForm">Değerlendir</button>
+                <?php endif; ?>
+                <?php if ($degerlendirme == true) : ?>
+                    <button class="evaluation-button-off">Değerlendir</button>
+                <?php endif; ?>
             </div>
         </div>
         <div class="degerlendirmeler">
@@ -378,13 +410,34 @@ if (isLoggedIn()) {
                 <?php endforeach; ?>
             <?php endif; ?>
             <?php if (empty($evaluations)) : ?>
-                <div style="font-size:24px; margin: 15px;text-align:center;">İlk değerlendirmeyi siz yapın.</div>
+                <div style="font-size: 20px; margin: 15px;text-align:center;">İlk değerlendirmeyi siz yapın.</div>
             <?php endif; ?>
         </div>
     </div>
     <?php mysqli_close($baglanti) ?>
     <?php include("../parts/avantaj.php"); ?>
     <?php include("../parts/footer.php"); ?>
+    <div class="reviewForm">
+        <form action="" method="post">
+            <!-- Yıldızlar -->
+            <textarea name="yorum" id="" cols="30" rows="4" placeholder="Yorumunuz..." required></textarea>
+            <button class="evaluation-button" type="submit" name="evaluation_submit">Kaydet</button>
+        </form>
+        <div class="close"></div>
+    </div>
+
+    <script>
+        let button = document.querySelector(".evaluation-button");
+        let form = document.querySelector(".reviewForm");
+        let close = document.querySelector(".close");
+
+        button.addEventListener('click', function() {
+            form.classList.add("active");
+        })
+        close.addEventListener('click', function() {
+            form.classList.remove("active");
+        })
+    </script>
 </body>
 
 </html>
