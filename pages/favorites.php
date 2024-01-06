@@ -64,6 +64,11 @@
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
+        <?php if (empty($favorites)) : ?>
+            <div class="favorites-content">
+                <div style="font-size: 20px;">Hiçbir üründe değerlendirmeniz yok.</div>
+            </div>
+        <?php endif; ?>
     </div>
     <?php mysqli_close($baglanti) ?>
     <?php include("../parts/avantaj.php") ?>
