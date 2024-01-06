@@ -61,7 +61,7 @@ if (isLoggedIn()) {
 
 $ev_ctrl = "SELECT musteri_id FROM evaluations WHERE urun_kodu =? AND musteri_id = ?";
 $stmt = mysqli_prepare($baglanti, $ev_ctrl);
-mysqli_stmt_bind_param($stmt, "i", $id, $musteri_id);
+mysqli_stmt_bind_param($stmt, "ii", $id, $musteri_id);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_store_result($stmt);
 if (mysqli_stmt_num_rows($stmt) == 1) {
