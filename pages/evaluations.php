@@ -40,7 +40,7 @@ if (isLoggedIn()) {
                             <?php echo $evaluation["urun"] ?>
                         </h4>
                         <div class="degerlendirme-head">
-                            <div><!--yıldızlar--></div>
+                            <div>Puan: <?php echo $evaluation["puan"] ?></div>
                             <div><?php echo $evaluation["add_time"] ?></div>
                             <form action="../libs/del_evaluation.php" method="post">
                                 <input type='hidden' name='product_id' value='<?php echo $evaluation['urun_kodu'] ?>'>

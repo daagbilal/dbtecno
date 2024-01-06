@@ -80,7 +80,7 @@
             echo "<div class='sepet-tutar'>
                     <h4>Ürünler: $tutar TL</h4>";
             echo "<h2 style='text-align: center;'>Toplam Tutar: $tutar TL</h2>
-                    <button class='siparis_ver' onclick='siparis()'>Sipariş Ver</button>
+                    <button class='siparis_ver'>Sipariş Ver</button>
                 </div>";
         }
         ?>

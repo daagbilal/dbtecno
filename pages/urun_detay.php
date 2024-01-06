@@ -79,7 +79,7 @@ if (isLoggedIn() && isset($_POST["evaluation_submit"])) {
     $musteri_id = $_SESSION["musteri_id"];
     $ad = $_SESSION["ad"];
     $soyad = $_SESSION["soyad"];
-    $puan = 3;
+    $puan = $_POST["rating"];
     $yorum = $_POST["yorum"];
     $add_time = date('Y-m-d');
     if (mysqli_stmt_execute($stmt)) {
@@ -102,6 +102,7 @@ if (isLoggedIn() && isset($_POST["evaluation_submit"])) {
     </title>
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"   />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -378,14 +379,11 @@ if (isLoggedIn() && isset($_POST["evaluation_submit"])) {
         <div class="total_degerlendirme">
             <div>
                 <h3><?php echo "$urun[marka] $urun[model] $urun[seri]" ?></h3>
-                <div>
-
-                </div>
-                <h3><?php echo $puan ?></h3>
-                <?php if ($degerlendirme == false) : ?>
+                <h3>Puan: <?php echo $puan ?></h3>
+                <?php if (isLoggedIn() && $degerlendirme == false) : ?>
                     <button class="evaluation-button" id="showReviewForm">Değerlendir</button>
                 <?php endif; ?>
-                <?php if ($degerlendirme == true) : ?>
+                <?php if (isLoggedIn() == false || $degerlendirme == true) : ?>
                     <button class="evaluation-button-off">Değerlendir</button>
                 <?php endif; ?>
             </div>
@@ -399,7 +397,7 @@ if (isLoggedIn() && isset($_POST["evaluation_submit"])) {
                             <div><?php echo $evaluation["add_time"] ?></div>
                         </div>
                         <div class="degerlendirme-star">
-
+                            <div>Puan: <?php echo $evaluation["puan"] ?></div>
                         </div>
                         <div class="degerlendirme-yorum">
                             <p><?php echo $evaluation["yorum"] ?></p>
@@ -417,7 +415,13 @@ if (isLoggedIn() && isset($_POST["evaluation_submit"])) {
     <?php include("../parts/footer.php"); ?>
     <div class="reviewForm">
         <form action="" method="post">
-            <!-- Yıldızlar -->
+            <div style="display: inline-block;">
+                <input type="radio" name="rating" id="rating-1" value=1><label for="rating-1">1</label>
+                <input type="radio" name="rating" id="rating-2" value=2><label for="rating-2">2</label>
+                <input type="radio" name="rating" id="rating-3" value=3><label for="rating-3">3</label>
+                <input type="radio" name="rating" id="rating-4" value=4><label for="rating-4">4</label>
+                <input type="radio" name="rating" id="rating-5" value=5><label for="rating-5">5</label>
+            </div>
             <textarea name="yorum" id="" cols="30" rows="4" placeholder="Yorumunuz..." required></textarea>
             <button class="evaluation-button" type="submit" name="evaluation_submit">Kaydet</button>
         </form>
