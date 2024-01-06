@@ -65,8 +65,8 @@
             </div>
         <?php endif; ?>
         <?php if (empty($favorites)) : ?>
-            <div class="favorites-content">
-                <div style="font-size: 20px;">Hiçbir üründe değerlendirmeniz yok.</div>
+            <div style="text-align: center; width: 75%;">
+                <div style="font-size: 20px;">Favori ürününüz yok.</div>
             </div>
         <?php endif; ?>
     </div>
