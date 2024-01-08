@@ -80,11 +80,16 @@
             echo "<div class='sepet-tutar'>
                     <h4>Ürünler: $tutar TL</h4>";
             echo "<h2 style='text-align: center;'>Toplam Tutar: $tutar TL</h2>
-                    <button class='siparis_ver'>Sipariş Ver</button>
+                    <button class='siparis_ver' onclick='goToPage()'>Sipariş Ver</button>
                 </div>";
         }
         ?>
     </div>
+    <script>
+        function goToPage() {
+            window.location.href = 'siparis_onay.php';
+        }
+    </script>
     <?php mysqli_close($baglanti) ?>
     <?php include("../parts/avantaj.php") ?>
     <?php include("../parts/footer.php") ?>

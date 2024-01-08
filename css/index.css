@@ -392,7 +392,7 @@ tr:nth-child(even) {
     height: 100%;
     width: 50%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -421,7 +421,7 @@ tr:nth-child(even) {
 }
 
 .sepet-tutar {
-    width: 20%;
+    width: 22.5%;
     height: 200px;
     background-color: white;
     border: 1px solid grey;
@@ -851,6 +851,78 @@ tr:nth-child(even) {
     cursor: pointer;
 }
 
+.s_onay_content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 30px auto;
+}
+
+.order_detail {
+    width: 70%;
+    min-height: 450px;
+}
+
+.select_adress {
+    width: 90%;
+    min-height: 175px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 15px;
+    background-color: white;
+
+}
+
+.select_adress select {
+    width: 80%;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.alici_iletisim {
+    border: 1px solid grey;
+    width: 80%;
+    margin: 15px 0;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.order_products {
+    min-height: 100px;
+    width: 90%;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 15px 0;
+}
+
+.order_product {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    margin: 5px 0;
+}
+
+.order_button {
+    width: 60%;
+    padding: 10px 0;
+    margin-top: 10px;
+    background-color: #0558EE;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+
 
 
 
@@ -937,6 +1009,10 @@ tr:nth-child(even) {
         width: 90%;
     }
 
+    .sepet-baslik {
+        width: 30%;
+    }
+
     .sepetim-baslik {
         font-size: large;
     }
@@ -1004,6 +1080,23 @@ tr:nth-child(even) {
 
     .evaluation {
         width: 100%;
+    }
+
+    .order_detail {
+        width: 90%;
+    }
+
+    .s_onay_content {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .order_product {
+        width: 100%;
+    }
+
+    .order_product h4 {
+        font-size: small;
     }
 }
 

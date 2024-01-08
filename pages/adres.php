@@ -9,14 +9,11 @@ if (isLoggedIn()) {
     if ($_GET["page"] == "adres-ekle") {
         if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["adres-submit"])) {
 
-            $sql = "INSERT INTO adres (musteri_id,ad,soyad,telefon,title,il,ilce,adres) VALUES (?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO adres (musteri_id,title,il,ilce,adres) VALUES (?,?,?,?,?)";
 
             $stmt = mysqli_prepare($baglanti, $sql);
-            mysqli_stmt_bind_param($stmt, "isssssss", $musteri_id, $name, $surname, $phone, $title, $il, $ilce, $adres);
+            mysqli_stmt_bind_param($stmt, "issss", $musteri_id, $title, $il, $ilce, $adres);
 
-            $name = safe_html($_POST["name"]);
-            $surname = safe_html($_POST["surname"]);
-            $phone = safe_html($_POST["phone"]);
             $title = safe_html($_POST["title"]);
             $il = safe_html($_POST["il"]);
             $ilce = safe_html($_POST["ilce"]);
@@ -44,14 +41,11 @@ if (isLoggedIn()) {
 
         if ((($_SERVER["REQUEST_METHOD"]) == "POST") && isset($_POST["adres-submit"])) {
 
-            $sql = "UPDATE adres SET ad = ?, soyad = ?, telefon = ?, title = ?, il = ?, ilce = ?, adres = ? WHERE adres_id = ?";
+            $sql = "UPDATE adres SET title = ?, il = ?, ilce = ?, adres = ? WHERE adres_id = ?";
 
             $stmt = mysqli_prepare($baglanti, $sql);
-            mysqli_stmt_bind_param($stmt, "sssssssi", $name, $surname, $phone, $title, $il, $ilce, $adres, $adres_id);
+            mysqli_stmt_bind_param($stmt, "ssssi", $title, $il, $ilce, $adres, $adres_id);
 
-            $name = safe_html($_POST["name"]);
-            $surname = safe_html($_POST["surname"]);
-            $phone = safe_html($_POST["phone"]);
             $title = safe_html($_POST["title"]);
             $il = safe_html($_POST["il"]);
             $ilce = safe_html($_POST["ilce"]);
@@ -95,21 +89,6 @@ mysqli_close($baglanti);
             <div class="address-form">
                 <form action="adres.php?page=adres-duzenle" method="post">
                     <h2>Adres Güncelle</h2>
-                    <input name="name" type="text" placeholder="Ad" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                                echo $_POST["name"];
-                                                                            } else {
-                                                                                echo $bilgi["ad"];
-                                                                            } ?>" required><br>
-                    <input name="surname" type="text" placeholder="Soyad" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                                        echo $_POST["surname"];
-                                                                                    } else {
-                                                                                        echo $bilgi["soyad"];
-                                                                                    } ?>" required><br>
-                    <input name="phone" type="text" placeholder="Telefon(5510001234)" value="<?php if (isset($_POST["adres-submit"])) {
-                                                                                                    echo $_POST["phone"];
-                                                                                                } else {
-                                                                                                    echo $bilgi["telefon"];
-                                                                                                } ?>" required><br>
                     <input name="title" type="text" placeholder="Adres Başlığı" value="<?php if (isset($_POST["adres-submit"])) {
                                                                                             echo $_POST["title"];
                                                                                         } else {
@@ -139,9 +118,6 @@ mysqli_close($baglanti);
         <?php if ($_GET["page"] == "adres-ekle") : ?>
             <form class="address-form" action="adres.php?page=adres-ekle" method="post">
                 <h2>Adres Ekle</h2>
-                <input name="name" type="text" placeholder="Ad" required><br>
-                <input name="surname" type="text" placeholder="Soyad" required><br>
-                <input name="phone" type="text" placeholder="Telefon(5510001234)" required><br>
                 <input name="title" type="text" placeholder="Adres Başlığı" required><br>
                 <input name="il" type="text" placeholder="İl" required><br>
                 <input name="ilce" type="text" placeholder="İlçe" required><br>

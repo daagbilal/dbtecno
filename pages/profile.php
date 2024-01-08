@@ -135,6 +135,8 @@ if ($_GET["page"] == 1) {
 
             if (mysqli_stmt_execute($stmt)) {
                 $message = "Bilgileriniz değiştirildi.";
+                $_SESSION["email"] = $email;
+                $_SESSION["telefon"] = $phone;
             } else {
                 $message = "Bir hata oluştu.";
             }

@@ -28,7 +28,7 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
     }
 
     if (empty($emailErr) && empty($passwordErr)) {
-        $sql = "SELECT id,ad,soyad,e_posta,sifre FROM users WHERE e_posta=?";
+        $sql = "SELECT id,ad,soyad,e_posta,telefon,sifre FROM users WHERE e_posta=?";
 
         if ($stmt = mysqli_prepare($baglanti, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $email);
@@ -37,13 +37,15 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    mysqli_stmt_bind_result($stmt, $id, $ad, $soyad, $email, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $ad, $soyad, $email, $telefon, $hashed_password);
                     if (mysqli_stmt_fetch($stmt)) {
                         if (password_verify($password, $hashed_password)) {
                             $_SESSION["loggedIn"] = true;
                             $_SESSION["musteri_id"] = $id;
                             $_SESSION["ad"] = $ad;
                             $_SESSION["soyad"] = $soyad;
+                            $_SESSION["email"] = $email;
+                            $_SESSION["telefon"] = $telefon;
                             $_SESSION["login_time"] = date('Y-m-d H:i:s');
                             $stmt = mysqli_prepare($baglanti, "UPDATE users SET login_time=? WHERE id=?");
                             mysqli_stmt_bind_param($stmt, "si", $login_time, $id);
