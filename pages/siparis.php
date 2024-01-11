@@ -77,7 +77,7 @@ if (isLoggedIn()) {
                                 </div>
                             </div>
                             <div>Sipariş No: <?php echo $order['siparis_id'] ?></div>
-                            <h4 style='width: 35%;'><?php echo $order['fiyat'] ?> TL</h4>
+                            <div><?php echo $order['fiyat'] ?> TL</div>
                             <div>
                                 <?php
                                 if ($order["durum"] == 0) {

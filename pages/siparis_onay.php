@@ -98,11 +98,11 @@ if (isLoggedIn()) {
                 <div class="order_products">
                     <?php foreach ($products as $product) : ?>
                         <div class="order_product">
-                            <div class='sepet-baslik'>
+                            <div class='order-baslik'>
                                 <img src='../image/<?php echo $product['resim_adi'] ?>' alt='<?php echo '$product[marka] $product[model] $product[seri]' ?> '>
                                 <div style='width: 40%;'>
                                     <a href='../pages/urun_detay.php?kod=<?php echo $product['urun_kodu'] ?>'>
-                                        <h4><?php echo "$product[marka] $product[model] $product[seri]" ?></h4>
+                                        <h4><?php echo "$product[marka] $product[model]" ?></h4>
                                     </a>
                                 </div>
                             </div>

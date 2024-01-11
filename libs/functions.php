@@ -19,7 +19,13 @@ function db_products($baglanti, string $product_ctg)
 
 function db_products_ctg($baglanti, string $product_ctg)
 {
-    $products = mysqli_query($baglanti, "SELECT urun_kodu,resim_adi,marka,model,seri,fiyat,degerlendirme FROM $product_ctg ORDER BY degerlendirme DESC, marka ASC LIMIT 5");
+    $products = mysqli_query($baglanti, "SELECT pc.urun_kodu, pc.resim_adi, pc.marka, pc.model, pc.seri, pc.fiyat, AVG(ev.puan) AS degerlendirme
+    FROM $product_ctg pc
+    INNER JOIN evaluations ev ON pc.urun_kodu = ev.urun_kodu
+    GROUP BY pc.urun_kodu, pc.resim_adi, pc.marka, pc.model, pc.seri, pc.fiyat
+    ORDER BY degerlendirme DESC, pc.marka ASC
+    LIMIT 5;
+    ");
     return mysqli_fetch_all($products, MYSQLI_ASSOC);
 }
 
