@@ -57,7 +57,7 @@ if (isLoggedIn()) {
                 $fiyat = ($product["fiyat"] * $product["miktar"]);
                 $miktar = $product["miktar"];
                 $address = "$adres[adres] $adres[ilce]/$adres[il]";
-                $add_time = date('Y-m-d');
+                $add_time = date('Y-m-d H:i:s');
                 if (mysqli_stmt_execute($stmt)) {
                     mysqli_stmt_close($stmt);
                 }

@@ -32,7 +32,7 @@
     <div class="sepet-content">
         <?php include("../parts/user_menu.php") ?>
         <div class="sepet">
-            <ul style="padding: 0; margin:0;">
+            <ul class="s-ul">
                 <?php
                 if ($sepet_products) {
                     foreach ($sepet_products as $sepet_product) {
