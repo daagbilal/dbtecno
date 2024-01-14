@@ -4,7 +4,7 @@
 <?php
 if (isLoggedIn()) {
     $musteri_id = $_SESSION["musteri_id"];
-    $sql = "SELECT * FROM evaluations WHERE musteri_id = ?";
+    $sql = "SELECT * FROM evaluations WHERE musteri_id = ? ORDER BY add_time DESC;";
     $stmt = mysqli_prepare($baglanti, $sql);
     mysqli_stmt_bind_param($stmt, "i", $musteri_id);
     mysqli_stmt_execute($stmt);
