@@ -1,1 +1,1 @@
-It is a PHP E-Commerce project developed for an Internet Programming course.
+It is an e-commerce project written in php language.
