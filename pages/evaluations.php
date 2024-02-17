@@ -44,7 +44,7 @@ if (isLoggedIn()) {
                             <div><?php echo $evaluation["add_time"] ?></div>
                             <form action="../libs/del_evaluation.php" method="post">
                                 <input type='hidden' name='product_id' value='<?php echo $evaluation['urun_kodu'] ?>'>
-                                <button class="delete-evaluation"><i class="fa-solid fa-trash fa-lg"></i></button>
+                                <button class="delete-evaluation"><i class="fa-solid fa-trash-can fa-lg"></i></button>
                             </form>
                         </div>
                         <div class="degerlendirme-yorum">

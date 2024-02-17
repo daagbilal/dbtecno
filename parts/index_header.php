@@ -4,18 +4,18 @@ if (isset($_SESSION["ad"])) {
 }
 ?>
 
-
 <div class="header">
     <a href="../index.php"><img src="../logo/2.png" alt="LOGO" class="logo"></a>
     <form class="search" method="get">
         <input class="search-1" type="search" name="search" placeholder="Arama">
-        <button class="search-2" type="submit">Ara</button>
+        <button class="search-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     <?php
     if (isLoggedIn()) {
         echo "
                 <div class='navbar'>
                     <ul>
+                        <a href= '../pages/sepet.php'><i class='fa-solid fa-cart-shopping fa-lg'></i></a>
                         <li>
                             <a class = 'button' style= 'margin-right: 5px;'>Hesabım</a>
                             <ul class='submenu'>
@@ -27,15 +27,14 @@ if (isset($_SESSION["ad"])) {
                                 <li><a href='../libs/logout.php'>Çıkış</a></li>
                             </ul>
                         </li>
-                        <li><a class = 'button' href= '../pages/sepet.php'>Sepetim</a><li>
                     </ul>
                 </div>";
     } else {
         echo "
                 <div class='navbar'>
                     <ul>
-                        <li><a class = 'button' href='../login.php' style = 'margin-right: 5px;'>Giriş Yap</a><li>
-                        <li><a class = 'button' href='../signup.php'>Üye Ol</a><li>
+                        <a href= '../pages/sepet.php'><i class='fa-solid fa-cart-shopping fa-lg'></i></a>
+                        <li style = 'margin: 0;'><a class = 'button' href='../login.php' style = 'margin-right: 5px;'>Giriş Yap</a><li>
                     </ul>
                 </div>";
     }

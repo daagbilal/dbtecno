@@ -9,12 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sepetim</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body style="background-color: #daddd678;">
 
-    <?php include("../parts/index_header.php"); ?>
-    <?php
+    <?php 
+    include("../parts/index_header.php");
+    $sepet_products = 0;
     if (isLoggedIn()) {
         $stmt = mysqli_prepare($baglanti, "SELECT musteri_id, urun_kodu, miktar FROM sepet WHERE musteri_id= ?");
         mysqli_stmt_bind_param($stmt, "i", $musteri_id);
@@ -25,7 +28,7 @@
         mysqli_stmt_close($stmt);
         $tutar = 0;
     } else {
-        header("Location: ../login.php");
+        
     }
     ?>
     <h2 class="sepetim-baslik" style="text-align: center;">Sepetim</h2>
@@ -64,7 +67,7 @@
                                 <h4 style= 'width: 35%;'>$product[fiyat] TL</h4>
                                 <form action='../libs/urun_kaldir.php' method='post'>
                                     <input type='hidden' name='product_id' value='$sepet_product[urun_kodu]'>
-                                    <button class='urun_kaldir' type='submit'>Kaldır</button>
+                                    <button class='urun_kaldir' type='submit'><i class='fa-solid fa-trash-can fa-lg'></i></button>
                                 </form>
                             </li>";
                         $tutar += ($product["fiyat"]);

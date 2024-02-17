@@ -49,9 +49,9 @@ body {
 }
 
 .search {
-    width: 45%;
+    width: 47.5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 0;
     padding: 0;
 }
@@ -65,9 +65,9 @@ body {
 }
 
 .search-2 {
-    width: 60px;
+    width: 40px;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     background-color: #0558EE;
     color: white;
     margin: 0;
@@ -307,7 +307,7 @@ tr:nth-child(even) {
     display: block;
     text-decoration: none;
     font-size: large;
-    padding: 5px 10px;
+    padding: 4px 8px;
     background-color: #0558EE;
     color: white;
     border-radius: 8px;
@@ -318,6 +318,10 @@ tr:nth-child(even) {
 
 .button:hover {
     background-color: #0557eebb;
+}
+.fa-cart-shopping {
+    color: #0558EE;
+    padding : 10px;
 }
 
 .navbar ul {
@@ -406,18 +410,8 @@ tr:nth-child(even) {
 }
 
 .urun_kaldir {
-    padding: 5px 10px;
-    background-color: #0558EE;
-    color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 15px;
-    transition: 0.5s;
     cursor: pointer;
-}
-
-.urun_kaldir:hover {
-    background-color: #0557eebb;
 }
 
 .sepet-tutar {
