@@ -29,6 +29,11 @@ function db_products_ctg($baglanti, string $product_ctg)
     return mysqli_fetch_all($products, MYSQLI_ASSOC);
 }
 
+function isAdminLoggedIn()
+{
+    return (isset($_SESSION["adminLoggedIn"]) && $_SESSION["adminLoggedIn"] == true);
+}
+
 function isLoggedIn()
 {
     return (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true);

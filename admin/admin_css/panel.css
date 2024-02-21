@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Nunito';
+    /* Yazı tipinin adını buraya yaz */
+    src: url('/Nunito/static/Nunito-Regular.ttf') format('woff');
+
+}
+
+body {
+    font-family: Nunito, sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.main-div {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+
+.options-div {
+    width: 20%;
+    background-color: #666;
+}
+
+.dashboard-div {
+    width: 80%;
+    background-color: #999;
+}
+
+.options-div ul li {
+    list-style-type: none;
+    margin: 6px 0;
+}
+
+.options-div ul li a {
+    color:white;
+    font-size: 20px;
+    text-decoration: none;
+}
