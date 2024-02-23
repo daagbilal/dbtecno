@@ -3,7 +3,7 @@ require_once("../parts/config.php");
 require("../libs/functions.php");
 session_start();
 if (isadminLoggedIn()) {
-    header("Location: admin_panel.php");
+    header("Location: panel.php");
 }
 
 $emailErr = $passwordErr = $loginErr = "";
@@ -48,7 +48,7 @@ if (($_SERVER["REQUEST_METHOD"]) == "POST") {
                             mysqli_stmt_close($stmt);
                             mysqli_close($baglanti);
 
-                            header("Location: admin_panel.php");
+                            header("Location: panel.php");
                         } else {
                             $loginErr = "Parola yanlış girildi.";
                         }
