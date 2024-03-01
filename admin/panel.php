@@ -47,7 +47,7 @@
         }
         // ^^^^^^^^^^
         // Tamamlanan Sipariş Sayısı
-        $sql2 = "SELECT COUNT(durum) AS tam_siparis FROM orders WHERE durum = 5";
+        $sql2 = "SELECT COUNT(durum) AS tam_siparis FROM orders WHERE durum = 3";
         $stmt = mysqli_prepare($baglanti, $sql2);
         if (mysqli_stmt_execute($stmt)) {
             $result = mysqli_stmt_get_result($stmt);
@@ -72,7 +72,7 @@
         COALESCE(c.stok, h.stok, t.stok, tv.stok, sw.stok) AS urun_stok,
         COUNT(o.siparis_id) AS order_count,
         SUM(CASE WHEN o.durum = 0 THEN 1 ELSE 0 END) AS durum_0_count,
-        SUM(CASE WHEN o.durum = 5 THEN 1 ELSE 0 END) AS durum_5_count
+        SUM(CASE WHEN o.durum = 3 THEN 1 ELSE 0 END) AS durum_3_count
     FROM orders o
     LEFT JOIN computers c ON o.urun_kodu = c.urun_kodu
     LEFT JOIN phones h ON o.urun_kodu = h.urun_kodu
@@ -150,7 +150,7 @@
                             <td><?php echo $sayac; ?></td>
                             <td><?php echo $result["urun_kodu"]?></td>
                             <td><?php echo "$result[urun_marka] $result[urun_model] $result[urun_seri]"?></td>
-                            <td><?php echo $result["durum_5_count"]?></td>
+                            <td><?php echo $result["durum_3_count"]?></td>
                             <td><?php echo $result["durum_0_count"]?></td>
                             <td><?php echo $result["urun_stok"]?></td>
                         </tr>
