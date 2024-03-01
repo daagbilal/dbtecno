@@ -1,1 +1,1 @@
-It is an e-commerce project written in php language.
+The DBtecno project is an e-commerce project created with php and developed on the sale of technology. Functions such as liking products, commenting, adding them to the cart and placing orders are available. Through the Admin panel, many categories such as product management, order management, customer management, inventory management and user management can be managed.

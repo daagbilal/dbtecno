@@ -80,7 +80,7 @@
     LEFT JOIN televisions tv ON o.urun_kodu = tv.urun_kodu
     LEFT JOIN smart_watchs sw ON o.urun_kodu = sw.urun_kodu
     GROUP BY urun_kodu, urun_marka, urun_model, urun_seri, urun_stok
-    ORDER BY order_count DESC, urun_marka ASC
+    ORDER BY durum_3_count DESC, urun_marka ASC
     LIMIT 10;
     ";
         $stmt = mysqli_prepare($baglanti, $sql4);
