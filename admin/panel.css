@@ -72,6 +72,50 @@ body {
     flex-wrap: wrap;
 }
 
+.control-buttons {
+    display: flex;
+    align-items: end;
+    width: 95%;
+    height: 50px;
+    margin: 25px 0;
+    position: relative;
+}
+.product-buttons {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    right: 0px;
+}
+.blue-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.green-button {
+    background-color: rgb(0, 183, 6);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.red-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.product-select {
+    width: 150px;
+    height: 25px;
+}
+.button-product {
+    height: 25px;
+    font-size: 15px;
+}
+
 .info_products {
     display: flex;
     justify-content: space-around;
@@ -86,10 +130,10 @@ body {
     border-radius: 15px;
     text-align: center;
 }
-.sellers {
+.product-list {
     width: 95%;
-    height: 300px;
-    overflow-y: scroll;
+    height: 400px;
+    overflow-y: auto;
     border: 1.5px solid black;
 }
 table {
