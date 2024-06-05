@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root-password
+      MYSQL_DATABASE: dbtecnoc_db
+      MYSQL_USER: dbtecnoc_user
+      MYSQL_PASSWORD: Nr&jm^aaOFX~
+
+  web:
+    image: php:8.2-apache
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8085:80"
+    depends_on:
+      - db
+    links:
+      - db
+    command: >
+      sh -c "docker-php-ext-install mysqli && apache2-foreground"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8086:80"
+    depends_on:
+      - db
+    links:
+      - db
